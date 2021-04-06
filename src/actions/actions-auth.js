@@ -7,7 +7,12 @@ import {
 
 export function login (username, password) {
     return (dispatch) => Api.login(username, password).then(
-            response => dispatch({ type: LOGIN, payload: response.data }),
-            _ => dispatch({ type: ERROR })
+        response => dispatch({ type: LOGIN, payload: response.data }),
+        _ => dispatch({ type: ERROR })
     )
 }
+
+export function logout () {
+    return { type: LOGOUT }
+}
+

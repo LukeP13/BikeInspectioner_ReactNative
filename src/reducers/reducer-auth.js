@@ -8,7 +8,6 @@ const initialState = {
     userId: '',
     token: '',
     expiresOn: '',
-    data: '',
 };
 
 const authReducer = (state = initialState, action) => {
@@ -20,7 +19,7 @@ const authReducer = (state = initialState, action) => {
                 isLoggedIn: true,
             };
         case LOGOUT:
-            return;
+            return initialState;
         default:
             return state;
     }

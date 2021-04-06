@@ -1,24 +1,24 @@
-
 import * as ActionCreators from './actions';
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-import SignIn from './components/signin';
-import Register from './components/register';
+import AuthNavigator from './navigators/auth-navigator';
+import AppNavigator from './navigators/app-navigator';
 
-const AuthStack = createStackNavigator();
+const RootComponent = ({ isLoggedIn }) => {
 
-const RootComponent = (props) => {
   return (
     <NavigationContainer>
-      <AuthStack.Navigator>
-        <AuthStack.Screen name="SignIn" component={SignIn} />
-        <AuthStack.Screen name="Register" component={Register} />
-      </AuthStack.Navigator>
+      {!isLoggedIn ? <AuthNavigator /> : <AppNavigator />}
     </NavigationContainer>
   )
 }
 
-export default connect(null, ActionCreators)(RootComponent)
+function mapStateToProps (state) {
+  return {
+    isLoggedIn: state.auth.isLoggedIn
+  }
+}
+
+export default connect(mapStateToProps, ActionCreators)(RootComponent)
