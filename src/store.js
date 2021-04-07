@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import loggerMiddleware from './middleware/logger'
+import loggerMiddleware from './library/middleware/logger'
 
 
 // Persist config

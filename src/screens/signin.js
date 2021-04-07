@@ -1,11 +1,26 @@
-import * as ActionCreators from '../actions';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button,  TouchableOpacity, StatusBar, Image } from 'react-native';
+import strings from '../../res/strings';
+import colors from '../../res/colors';
+import images from '../../res/images';
+import GlobalStyles from '../styles/styles';
+
+import * as ActionCreators from '../actions';
 import { connect } from 'react-redux';
+import { screens } from '../navigators/auth-navigator'
+
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  TextInput, 
+  TouchableOpacity, 
+  StatusBar, 
+  Image
+} from 'react-native';
 import { ScreenContainer } from 'react-native-screens';
 
 
-const SignIn = (props) => {
+const SignIn = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,28 +33,29 @@ const SignIn = (props) => {
   }
 
   function register () {
-
+    navigation.push(screens.Register)
   }
 
   return (
     <ScreenContainer style={styles.container}>
         <StatusBar style="auto" />
-        <Image style={styles.logo} source={require('../../assets/icon.png')}/>
+        <Image style={styles.logo} source={images.logo}/>
 
         <View style={styles.inputView}>
           <TextInput 
             style={styles.textInput}
             value={username}
             onChangeText={setUsername}
-            placeholder="Username or Email"
+            placeholder={strings.usernameLabel}
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
+            secureTextEntry
             style={styles.textInput}
             value={password}
             onChangeText={setPassword}
-            placeholder="Password"
+            placeholder={strings.passwordLabel}
           />
         </View>
         
@@ -47,23 +63,22 @@ const SignIn = (props) => {
           style={styles.forgotBtn}
           onPress={resetPassword}
           >
-          <Text style={styles.forgotText}>Forgot Password?</Text>
+          <Text style={styles.forgotText}>{strings.forgotLabel}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 
           style={styles.loginBtn} 
           onPress={login}
           >
-          <Text style={styles.loginText}>LOGIN</Text>
+          <Text style={styles.loginText}>{strings.loginButton}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 
           style={styles.registerBtn} 
           onPress={register}
           >
-          <Text style={styles.registerText}>Create Account</Text>
+          <Text style={styles.registerText}>{strings.registerLabel}</Text>
         </TouchableOpacity>
-
     </ScreenContainer>
   );
 }
@@ -72,7 +87,6 @@ const SignIn = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column'
@@ -83,7 +97,9 @@ const styles = StyleSheet.create({
     width: 100
   },
   inputView: {
-    backgroundColor: "#FFC0CB",
+    backgroundColor: "white",
+    borderColor: colors.secondaryColor,
+    borderWidth: 2,
     borderRadius: 30,
     width: "70%",
     height: 45,
@@ -94,10 +110,12 @@ const styles = StyleSheet.create({
     height: 50,
     flex: 1,
     padding: 10,
+    textAlign: 'center'
   },
   forgotText: {
     height: 30,
     marginBottom: 30,
+    ...GlobalStyles.italic
   },
   loginBtn: {
     width:"80%",
@@ -106,12 +124,15 @@ const styles = StyleSheet.create({
     alignItems:"center",
     justifyContent:"center",
     marginTop:40,
-    backgroundColor:"#FF1493",
+    backgroundColor: colors.secondaryColor,
   },
   registerBtn: {
     width:"75%",
     alignItems: "flex-end",
-    marginTop: 10
+    marginTop: 10,
+  },
+  registerText: {
+    ...GlobalStyles.italic
   }
 });
 
