@@ -3,5 +3,5 @@ export default strings = {
     passwordLabel: "Password",
     forgotLabel: "Forgot password?",
     loginButton: "LOGIN",
-    registerLabel: "Create account"
+    registerLabel: "Create account",
 }

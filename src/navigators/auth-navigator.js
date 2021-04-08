@@ -6,11 +6,6 @@ import Register from '../screens/register';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export const screens = {
-  SignIn: 'SignIn',
-  Register: 'Register'
-}
-
 export default AuthNavigator = () => (
   <Navigator>
       <Screen 

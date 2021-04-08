@@ -8,7 +8,7 @@ import {
 export function login (username, password) {
     return (dispatch) => Api.login(username, password).then(
         response => dispatch({ type: LOGIN, payload: response.data }),
-        _ => dispatch({ type: ERROR })
+        err => dispatch({ type: ERROR, error: err.response.data && err.response.data.message })
     )
 }
 

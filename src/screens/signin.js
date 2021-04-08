@@ -6,7 +6,6 @@ import GlobalStyles from '../styles/styles';
 
 import * as ActionCreators from '../actions';
 import { connect } from 'react-redux';
-import { screens } from '../navigators/auth-navigator'
 
 import { 
   StyleSheet, 
@@ -18,14 +17,21 @@ import {
   Image
 } from 'react-native';
 import { ScreenContainer } from 'react-native-screens';
+import TimeoutText from '../library/components/timeoutText';
 
 
-const SignIn = ({ navigation }) => {
+const SignIn = ({ navigation, login }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage]   = useState('');
 
-  function login () {
-    props.login(username, password)
+  function onLogin () {
+    setMessage('')
+    login(username, password)
+      .then(({ error }) => {
+        if(error) setMessage(error)
+      })
+      .catch(_ => setMessage('Network error!'))
   }
 
   function resetPassword () {
@@ -33,7 +39,7 @@ const SignIn = ({ navigation }) => {
   }
 
   function register () {
-    navigation.push(screens.Register)
+    navigation.push('Register')
   }
 
   return (
@@ -66,9 +72,14 @@ const SignIn = ({ navigation }) => {
           <Text style={styles.forgotText}>{strings.forgotLabel}</Text>
         </TouchableOpacity>
 
+        <TimeoutText 
+          value={message}
+          timeout={1500}
+        />
+
         <TouchableOpacity 
           style={styles.loginBtn} 
-          onPress={login}
+          onPress={onLogin}
           >
           <Text style={styles.loginText}>{strings.loginButton}</Text>
         </TouchableOpacity>
@@ -114,7 +125,7 @@ const styles = StyleSheet.create({
   },
   forgotText: {
     height: 30,
-    marginBottom: 30,
+    marginBottom: 10,
     ...GlobalStyles.italic
   },
   loginBtn: {
