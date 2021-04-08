@@ -97,15 +97,15 @@ const SignIn = ({ navigation, login }) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: colors.backgroundColor,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column'
   },
   logo: {
-    marginBottom: 40,
-    height: 100,
-    width: 100
+    marginBottom: 70,
+    width: 220
   },
   inputView: {
     backgroundColor: "white",

@@ -18,7 +18,8 @@ export default AuthNavigator = () => (
         name="Register" 
         component={Register} 
         options={{ 
-          title: "New account" 
+          title: "New account",
+          headerStyle: { backgroundColor: 'transparent', elevation:0 }
         }}/>
   </Navigator>
 )
