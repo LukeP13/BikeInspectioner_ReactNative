@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { ScreenContainer } from "react-native-screens"
 import colors from '../../res/colors';
+import strings from '../../res/strings';
 
 import ValidationTextInput from '../library/components/validationTextInput';
 
@@ -40,7 +41,7 @@ const Register = () => {
     return (
         <ScreenContainer style={styles.container}>
             <ValidationTextInput 
-                placeholder="Username *"
+                placeholder={strings.registerUsername}
                 value={username}
                 onChangeText={setUsername}
                 type="username"
@@ -49,7 +50,7 @@ const Register = () => {
                 required
             />
             <ValidationTextInput 
-                placeholder="Email *"
+                placeholder={strings.registerEmail}
                 value={email}
                 onChangeText={setEmail}
                 type="email"
@@ -57,7 +58,7 @@ const Register = () => {
                 required
             />
             <ValidationTextInput 
-                placeholder="Password *"
+                placeholder={strings.registerPassword}
                 value={password}
                 onChangeText={setPassword}
                 type="password"
@@ -66,7 +67,7 @@ const Register = () => {
                 required secureTextEntry
             />
             <ValidationTextInput 
-                placeholder="Repeat password *"
+                placeholder={strings.registerRepeatPassword}
                 value={repeatPassword}
                 onChangeText={setRepeatPassword}
                 type="password"
@@ -76,7 +77,7 @@ const Register = () => {
                 required secureTextEntry
             />
             <ValidationTextInput 
-                placeholder="Phone"
+                placeholder={strings.registerPhone}
                 value={phone}
                 onChangeText={setPhone}
                 onValidChange={val => onValidChange("phone", val)}

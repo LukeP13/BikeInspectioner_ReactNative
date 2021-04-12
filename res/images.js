@@ -1,3 +1,3 @@
 export default images = {
-    logo: require('./images/Logo-Bike-Inspect.png')
+    logo: require('./images/logoBI_sm.png')
 }

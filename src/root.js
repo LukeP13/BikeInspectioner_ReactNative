@@ -7,7 +7,6 @@ import AuthNavigator from './navigators/auth-navigator';
 import AppNavigator from './navigators/app-navigator';
 
 const RootComponent = ({ isLoggedIn }) => {
-
   return (
     <NavigationContainer>
       {!isLoggedIn ? <AuthNavigator /> : <AppNavigator />}

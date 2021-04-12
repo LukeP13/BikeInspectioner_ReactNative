@@ -3,14 +3,20 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import { Provider } from 'react-redux';
 import RootComponent from './src/root';
 import { store, persistor } from './src/store';
+import { AppearanceProvider, Appearance } from 'react-native-appearance';
+
+
 
 const App = () => {
+  Appearance.set({ colorScheme: "light" })
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <RootComponent />
-      </PersistGate>
-    </Provider>
+    <AppearanceProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <RootComponent />
+        </PersistGate>
+      </Provider>
+    </AppearanceProvider>
   );
 }
 

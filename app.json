@@ -1,5 +1,6 @@
 {
   "expo": {
+    "userInterfaceStyle": "light",
     "name": "BikeInspec",
     "slug": "BikeInspec",
     "version": "1.0.0",
@@ -17,13 +18,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "userInterfaceStyle": "light",
+      "infoPlist": {
+        "UIUserInterfaceStyle": "Light"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./res/images/adaptive-icon.png",
+        "foregroundImage": "./res/images/logoBI_sm.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "userInterfaceStyle": "light"
     },
     "web": {
       "favicon": "./res/images/favicon.png"

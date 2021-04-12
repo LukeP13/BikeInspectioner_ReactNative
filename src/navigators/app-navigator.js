@@ -1,6 +1,7 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from '../screens/home';
+import AddBikeNavigator from './addBike-navigator';
 
 const { Navigator, Screen } = createDrawerNavigator();
 
@@ -12,8 +13,16 @@ export default AppNavigator = () => (
             options={{ title: 'Home' }}
         />
         <Screen 
+            name="AddBike"
+            component={AddBikeNavigator}
+            options={{
+                title: "Add Bike"
+            }}
+        />
+        <Screen 
             name="Profile"
             component={HomeScreen}
         />
     </Navigator>
+
 )

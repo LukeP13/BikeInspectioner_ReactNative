@@ -4,4 +4,9 @@ export default strings = {
     forgotLabel: "Forgot password?",
     loginButton: "LOGIN",
     registerLabel: "Create account",
+    registerUsername: "Username *",
+    registerEmail: "Email *",
+    registerPassword: "Password *",
+    registerRepeatPassword: "Repeat password *",
+    registerPhone: "Phone  (Optional)"
 }

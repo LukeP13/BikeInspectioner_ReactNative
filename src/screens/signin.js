@@ -35,7 +35,7 @@ const SignIn = ({ navigation, login }) => {
   }
 
   function resetPassword () {
-    console.log('resetPassword')
+    console.log('forgotPassword')
   }
 
   function register () {
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginBottom: 70,
-    width: 220
+    width: 250
   },
   inputView: {
     backgroundColor: "white",

@@ -5,13 +5,20 @@ import { connect } from 'react-redux';
 
 import * as ActionCreators from '../actions';
 
+/* TODO: List */
+
 const HomeScreen = (props) => {
     return (
         <ScreenContainer style={styles.container}>
             <Text>Home</Text>
+            <Button
+              title="Add motorcycle"
+              onPress={() => props.navigation.navigate('AddBike')} 
+            />
             <Button 
-                title="Logout"
-                onPress={props.logout} />
+              title="Logout"
+              onPress={props.logout} 
+            />
         </ScreenContainer>
     )
 }
