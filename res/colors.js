@@ -4,4 +4,6 @@ export default colors = {
     backgroundColor: "#ebebeb",
     disabledColor: "#cdc5ed",
     black: "black",
+    white: "white",
+    transparent: "transparent"
 }

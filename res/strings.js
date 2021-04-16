@@ -8,5 +8,8 @@ export default strings = {
     registerEmail: "Email *",
     registerPassword: "Password *",
     registerRepeatPassword: "Repeat password *",
-    registerPhone: "Phone  (Optional)"
+    registerPhone: "Phone  (Optional)",
+
+    brandSelectTitle: "Select brand",
+    modelSelectTitle: "Select model",
 }

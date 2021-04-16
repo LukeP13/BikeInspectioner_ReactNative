@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import SignIn from '../screens/signin';
 import Register from '../screens/register';
+import { StackNavHeaderOptions } from './headerStyles';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -11,15 +12,14 @@ export default AuthNavigator = () => (
       <Screen 
         name="SignIn" 
         component={SignIn} 
-        options={{ 
-          headerShown: false
-        }}/>
+        options={StackNavHeaderOptions.primary}
+        />
       <Screen 
         name="Register" 
         component={Register} 
         options={{ 
           title: "New account",
-          headerStyle: { backgroundColor: 'transparent', elevation:0 }
+          ...StackNavHeaderOptions.secondary
         }}/>
   </Navigator>
 )
