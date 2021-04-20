@@ -5,12 +5,14 @@ import { TouchableNativeFeedback } from "react-native-gesture-handler";
 import colors from "../../../res/colors";
 
 
-const SearchList = ({ list, onSelect }) => {
+const SearchList = ({ list, onSelect, getItemValue, filterList, getKey }) => {
     const [search, setSearch] = useState('');
     const [filteredList, setFilteredList] = useState(list);
 
-    function filterList (list, search) {
-        return list.filter(item => item.toLowerCase().includes(search.toLowerCase()))
+    getKey = getKey || ((_, i) => i);
+    getItemValue = getItemValue || (item => item)
+    filterList = filterList || function (list, search) {
+        return list.filter(item => getItemValue(item).toLowerCase().includes(search.toLowerCase()))
     }
 
     useEffect(() => {
@@ -30,13 +32,13 @@ const SearchList = ({ list, onSelect }) => {
             <View 
                 style={styles.listContainer}
             >
-                {filteredList.map(item => (
+                {filteredList.map((item, i) => (
                     <TouchableNativeFeedback
-                        key={item}
+                        key={getKey(item, i)}
                         style={styles.itemContainer} 
                         onPress={() => onSelect(item)}
                     >
-                        <Text style={styles.itemText}>{item}</Text>
+                        <Text style={styles.itemText}>{getItemValue(item)}</Text>
                     </TouchableNativeFeedback>
                 ))}
             </View>

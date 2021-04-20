@@ -28,10 +28,11 @@ export default AddBikeNavigator = () => (
         <Screen 
             name="modelSelect" 
             component={ModelSelect} 
-            options={{
-                title: strings.modelSelectTitle,
+            options={({ route }) => ({
+                title: `${strings.modelSelectTitle} - ${route.params.brand.name}`,
                 ...StackNavHeaderOptions.secondary
-            }}
+            })}
+            getId={({ params }) => params.id}
         />
     </Navigator>
 )

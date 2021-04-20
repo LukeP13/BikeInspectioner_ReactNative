@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, } from "react-native";
 import { ScreenContainer } from "react-native-screens";
 import { connect } from "react-redux";
+import * as ActionCreators from '../../actions'
 import strings from '../../../res/strings';
 import SearchList from '../../library/components/searchList';
 
 
 
-const BrandSelect = ({ brands, navigation }) => {
-    const LIST = ["Kawasaki", "Ducati", "Other"]
+const BrandSelect = ({ brands, navigation, ...props }) => {
+    //State
+    const [loaded, setLoaded] = useState(false);
+    
+    useEffect(() => {
+        //Load data 
+        props.getBrands().then(({ error }) => error || setLoaded(true))
+    }, [])
+
     return(
         <ScreenContainer style={styles.container}>
             <SearchList
-                list={LIST ||brands.map(a => a.name)}
-                onSelect={() => navigation.navigate("modelSelect")}
+                list={loaded ? brands : []}
+                onSelect={(val) => navigation.navigate("modelSelect", { brand: val })}
+                getItemValue={i => i.name}
             />
         </ScreenContainer>
     )
@@ -33,4 +42,4 @@ function mapObjectToProps(state) {
     }
 }
 
-export default connect(mapObjectToProps)(BrandSelect);
+export default connect(mapObjectToProps, ActionCreators)(BrandSelect);

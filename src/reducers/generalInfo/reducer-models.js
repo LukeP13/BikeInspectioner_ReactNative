@@ -1,13 +1,13 @@
 import {
-    GOT_BRANDS
+    GOT_MODELS
 } from '../../actions/types'
 
 const initialState = [
 ]
 
-export default brandReducer = (state = initialState, action) => {
+export default modelReducer = (state = initialState, action) => {
     switch(action.type){
-        case GOT_BRANDS:
+        case GOT_MODELS:
             return action.payload;
         default:
             return state;

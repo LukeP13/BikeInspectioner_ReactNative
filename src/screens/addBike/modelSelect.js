@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, } from "react-native";
 import { ScreenContainer } from "react-native-screens";
 import { connect } from "react-redux";
+import * as ActionCreators from '../../actions'
 import SearchList from '../../library/components/searchList';
 
 
 
-const ModelSelect = ({ models, navigation }) => {
-    const LIST = ["z800", "ninja 300", "er6-f"]
+const ModelSelect = ({ models, navigation, route: { params }, ...props}) => {
+    const { _id, name } = params.brand;
+
+    //State
+    const [loaded, setLoaded] = useState(false);
+    
+    useEffect(() => {
+        //Load data 
+        props.getModels(_id).then(({ error }) => error || setLoaded(true))
+    }, [])
+
     return(
         <ScreenContainer style={styles.container}>
             <SearchList
-                list={LIST || models.map(a => a.name)}
+                list={loaded ? models.map(a => a.name) : []}
                 onSelect={() => {}}
             />
         </ScreenContainer>
@@ -32,4 +42,4 @@ function mapObjectToProps(state) {
     }
 }
 
-export default connect(mapObjectToProps)(ModelSelect);
+export default connect(mapObjectToProps, ActionCreators)(ModelSelect);
