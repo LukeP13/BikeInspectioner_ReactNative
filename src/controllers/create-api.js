@@ -10,7 +10,7 @@ export default CreateApi = (url) => {
     }
 
     function config() {
-        let { isLoggedIn, token } = store.getState().auth;
+        const { isLoggedIn, token } = store.getState().auth;
 
         return isLoggedIn ? {
             headers: {

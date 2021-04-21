@@ -3,6 +3,7 @@ import {
     login,
     brands,
     models,
+    bikes,
 } from './paths';
 
 const state = {
@@ -18,6 +19,11 @@ const Api = {
     getBrands: () => _api.get(`${brands}`),
     getBrand:  (id) => _api.get(`${brands}/${id}`),
     getModels: (id) => _api.get(`${brands}/${id}/${models}`),
+
+
+    //Bikes
+    getBikes: () => _api.get(`${bikes}`),
+    postBike: (body) => _api.post(`${bikes}`, body)
 }
 
 export default Api;

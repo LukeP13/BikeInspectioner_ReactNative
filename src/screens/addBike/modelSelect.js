@@ -8,7 +8,7 @@ import SearchList from '../../library/components/searchList';
 
 
 const ModelSelect = ({ models, navigation, route: { params }, ...props}) => {
-    const { _id, name } = params.brand;
+    const { _id } = params.brand;
 
     //State
     const [loaded, setLoaded] = useState(false);
@@ -18,11 +18,19 @@ const ModelSelect = ({ models, navigation, route: { params }, ...props}) => {
         props.getModels(_id).then(({ error }) => error || setLoaded(true))
     }, [])
 
+    function onSelect({_id}){
+        navigation.pop(2);
+        /*props.addBike(_id)
+        .then(_ => {
+            navigation.pop(2);
+        });*/
+    }
+
     return(
         <ScreenContainer style={styles.container}>
             <SearchList
                 list={loaded ? models.map(a => a.name) : []}
-                onSelect={() => {}}
+                onSelect={onSelect}
             />
         </ScreenContainer>
     )
