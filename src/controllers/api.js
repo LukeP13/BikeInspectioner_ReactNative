@@ -4,16 +4,18 @@ import {
     brands,
     models,
     bikes,
+    notificationToken
 } from './paths';
 
 const state = {
     baseURL: "http://localhost:5000",
 }
-const _api = CreateApi(state.baseURL)
+const _api = CreateApi(state.baseURL) 
 
 const Api = {
     //Auth
     login: (username, password) =>  _api.post(`${login}`, { username, password }),
+    sendNotificationToken: (body) => _api.post(`${notificationToken}`, body),
 
     //Brands && Models
     getBrands: () => _api.get(`${brands}`),
@@ -23,7 +25,7 @@ const Api = {
 
     //Bikes
     getBikes: () => _api.get(`${bikes}`),
-    postBike: (body) => _api.post(`${bikes}`, body)
+    postBike: (body) => _api.post(`${bikes}`, body),
 }
 
 export default Api;

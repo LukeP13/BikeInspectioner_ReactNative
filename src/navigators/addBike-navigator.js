@@ -10,7 +10,7 @@ import { StackNavHeaderOptions } from './headerStyles';
 const { Navigator, Screen } = createStackNavigator();
 
 
-export default AddBikeNavigator = () => (
+const AddBikeNavigator = () => (
     <Navigator>
         <Screen 
             name="index" 
@@ -27,13 +27,17 @@ export default AddBikeNavigator = () => (
         />
         <Screen 
             name="modelSelect" 
-            component={ModelSelect} 
+            component={ModelSelect}
             options={({ route }) => ({
                 title: `${strings.modelSelectTitle} - ${route.params.brand.name}`,
                 ...StackNavHeaderOptions.secondary
             })}
             getId={({ params }) => params.id}
-        />
+        >
+        </Screen>
     </Navigator>
 )
 
+
+
+export default AddBikeNavigator;

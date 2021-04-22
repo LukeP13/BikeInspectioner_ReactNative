@@ -13,7 +13,7 @@ export function getBikes () {
 
 
 export function addBike (modelId) {
-    return (dispatch) => Api.addBike(modelId).then(
+    return (dispatch) => Api.postBike(modelId).then(
         () => getBikes()(dispatch),
         () => dispatch({ type: ERROR })
     )

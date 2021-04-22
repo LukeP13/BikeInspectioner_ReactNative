@@ -6,3 +6,5 @@ export const brands = 'brands';
 export const models = 'models';
 
 export const bikes = 'bikes';
+
+export const notificationToken = 'notificationToken'

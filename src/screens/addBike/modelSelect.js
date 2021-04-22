@@ -18,12 +18,10 @@ const ModelSelect = ({ models, navigation, route: { params }, ...props}) => {
         props.getModels(_id).then(({ error }) => error || setLoaded(true))
     }, [])
 
-    function onSelect({_id}){
+    function onSelect(item) {
+        props.addBike(item);
         navigation.pop(2);
-        /*props.addBike(_id)
-        .then(_ => {
-            navigation.pop(2);
-        });*/
+        navigation.navigate('Home');
     }
 
     return(

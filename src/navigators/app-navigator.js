@@ -24,5 +24,4 @@ export default AppNavigator = () => (
             component={HomeScreen}
         />
     </Navigator>
-
 )

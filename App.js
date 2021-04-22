@@ -5,7 +5,9 @@ import RootComponent from './src/root';
 import { store, persistor } from './src/store';
 import { AppearanceProvider, Appearance } from 'react-native-appearance';
 
-
+//Initialize firebase
+import firebaseInit from './src/library/connections/firebase'
+firebaseInit();
 
 const App = () => {
   Appearance.set({ colorScheme: "light" })
