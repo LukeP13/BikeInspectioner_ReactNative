@@ -18,16 +18,19 @@ import {
 } from 'react-native';
 import { ScreenContainer } from 'react-native-screens';
 import TimeoutText from '../library/components/timeoutText';
+import registerForPushNotificationsAsync from '../controllers/registerForPushNotificationsAsync';
 
 
 const SignIn = ({ navigation, login }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage]   = useState('');
+  const [message,   setMessage] = useState('');
 
-  function onLogin () {
+  async function onLogin () {
     setMessage('')
-    login(username, password)
+    const { token } = await registerForPushNotificationsAsync();
+
+    login(username, password, token)
       .then(({ error }) => {
         if(error) setMessage(error)
       })

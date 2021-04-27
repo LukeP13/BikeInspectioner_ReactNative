@@ -5,7 +5,7 @@
     "slug": "BikeInspec",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./res/images/icon.png",
+    "icon": "./res/images/iconBI.png",
     "splash": {
       "image": "./res/images/splash.png",
       "resizeMode": "contain",
@@ -26,7 +26,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./res/images/logoBI_sm.png",
+        "foregroundImage": "./res/images/iconBI.png",
         "backgroundColor": "#FFFFFF"
       },
       "userInterfaceStyle": "light"

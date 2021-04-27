@@ -1,4 +1,5 @@
-import { Permissions, Notifications } from 'expo';
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
 
 async function registerForPushNotificationsAsync() {
     const { status: existingStatus } = await Permissions.getAsync(
@@ -16,10 +17,15 @@ async function registerForPushNotificationsAsync() {
         return;
     }
 
-    // Get the token that uniquely identifies this device
-    let token = await Notifications.getExpoPushTokenAsync();
+    try{
+        // Get the token that uniquely identifies this device
+        let token = await Notifications.getExpoPushTokenAsync();
 
-    //SAVE TOKEN to reducer for when login
+        //SAVE TOKEN to reducer for when login
+        return { token };
+    } catch (error) {
+        return { error }
+    }
 }
 
 export default registerForPushNotificationsAsync;

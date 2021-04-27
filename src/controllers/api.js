@@ -14,7 +14,7 @@ const _api = CreateApi(state.baseURL)
 
 const Api = {
     //Auth
-    login: (username, password) =>  _api.post(`${login}`, { username, password }),
+    login: (body) =>  _api.post(`${login}`, body),
     sendNotificationToken: (body) => _api.post(`${notificationToken}`, body),
 
     //Brands && Models

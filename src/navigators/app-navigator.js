@@ -2,6 +2,7 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from '../screens/home';
 import AddBikeNavigator from './addBike-navigator';
+import ProfileScreen from '../screens/profile';
 
 const { Navigator, Screen } = createDrawerNavigator();
 
@@ -21,7 +22,7 @@ export default AppNavigator = () => (
         />
         <Screen 
             name="Profile"
-            component={HomeScreen}
+            component={ProfileScreen}
         />
     </Navigator>
 )

@@ -5,8 +5,8 @@ import {
     ERROR
 } from './types';
 
-export function login (username, password) {
-    return (dispatch) => Api.login(username, password).then(
+export function login (username, password, token) {
+    return (dispatch) => Api.login({ username, password, notificationToken:token }).then(
         response => dispatch({ type: LOGIN, payload: response.data }),
         err => dispatch({ type: ERROR, error: err.response.data && err.response.data.message })
     )

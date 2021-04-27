@@ -1,24 +1,26 @@
 import React from 'react'
+import { View } from 'react-native';
 import { Button, SafeAreaView, StyleSheet, Text } from 'react-native'
 import { ScreenContainer } from 'react-native-screens'
 import { connect } from 'react-redux';
 
 import * as ActionCreators from '../actions';
+import Navbar from '../library/components/navbar';
 
 /* TODO: List */
 
-const HomeScreen = (props) => {
+const HomeScreen = ({ navigation }) => {
     return (
         <ScreenContainer style={styles.container}>
-            <Text>Home</Text>
-            <Button
-              title="Add motorcycle"
-              onPress={() => props.navigation.navigate('AddBike')} 
-            />
-            <Button 
-              title="Logout"
-              onPress={props.logout} 
-            />
+            <Navbar navigation={navigation}/>
+
+            <View style={styles.content}>
+              <Text>Home</Text>
+              <Button
+                title="Add motorcycle"
+                onPress={() => navigation.navigate('AddBike')} 
+              />
+            </View>
         </ScreenContainer>
     )
 }
@@ -26,10 +28,13 @@ const HomeScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+  },
+  content: {
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginTop: 70,
+    flex: 1,
   }
 });
 
