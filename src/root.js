@@ -5,10 +5,12 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import AuthNavigator from './navigators/auth-navigator';
 import AppNavigator from './navigators/app-navigator';
+import { StatusBar } from 'react-native';
 
 const RootComponent = ({ isLoggedIn }) => {
   return (
     <NavigationContainer>
+      <StatusBar />
       {!isLoggedIn ? <AuthNavigator /> : <AppNavigator />}
     </NavigationContainer>
   )

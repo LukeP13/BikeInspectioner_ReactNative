@@ -5,6 +5,7 @@ import { Button } from 'react-native';
 import { Text } from 'react-native';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native';
+import { colors } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import images from '../../../res/images';
 
@@ -14,7 +15,6 @@ const Navbar = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <StatusBar />
             <View style={styles.left}>
                 <TouchableOpacity
                     style={styles.buttonDrawerContainer}
@@ -38,7 +38,7 @@ const Navbar = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        zIndex: 20,
+        zIndex: 21,
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         left: 0,
         height: 80,
         paddingTop: 10,
+        backgroundColor: colors.white
     },
     logo: {
         height: 70,

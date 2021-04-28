@@ -1,10 +1,14 @@
-import { combineReducers } from 'redux';
-import generalInfoReducer from './generalInfo';
-import authReducer from './reducer-auth';
+import { combineReducers } from "redux";
+import generalInfoReducer from "./generalInfo";
+import authReducer from "./reducer-auth";
+import bikeReducer from "./reducer-bike";
 
 const rootReducer = combineReducers({
-    auth: authReducer,
-    general: generalInfoReducer
-})
+  general: generalInfoReducer,
+
+  //Personal info
+  auth: authReducer,
+  bikes: bikeReducer,
+});
 
 export default rootReducer;
