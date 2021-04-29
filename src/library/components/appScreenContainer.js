@@ -7,10 +7,10 @@ import colors from "../../../res/colors";
 import Navbar from "./navbar";
 /* TODO: List */
 
-const AppScreenContainer = ({ navigation, children }) => {
+const AppScreenContainer = ({ navigation, children, title }) => {
   return (
     <ScreenContainer style={styles.container}>
-      <Navbar navigation={navigation} />
+      <Navbar navigation={navigation} title={title} />
       <SafeAreaView style={styles.content}>{children}</SafeAreaView>
     </ScreenContainer>
   );
