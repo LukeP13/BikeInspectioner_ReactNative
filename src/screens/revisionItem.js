@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { formatTime } from "../library/functions/convertMS";
 import globalStyles from "../styles/styles";
 
 const RevisionItem = ({ item }) => {
@@ -7,7 +8,11 @@ const RevisionItem = ({ item }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.name}>{name}</Text>
-      <Text style={styles.period}>{distance ? `${distance} Km` : ``}</Text>
+      <Text style={styles.period}>
+        {distance
+          ? `${distance} Km${time ? ` ${strings.or} ${formatTime(time)}` : ""}`
+          : `${time ? formatTime(time) : "--"}`}
+      </Text>
     </View>
   );
 };

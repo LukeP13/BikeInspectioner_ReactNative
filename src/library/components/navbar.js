@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Image, Button, Text, View, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import colors from "../../../res/colors";
 import images from "../../../res/images";
 
 const Navbar = ({ navigation, title }) => {
@@ -39,13 +38,13 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    height: 80,
+    height: 65,
     paddingTop: 10,
-    backgroundColor: colors.white,
   },
   logo: {
-    height: 70,
+    height: 50,
     width: 200,
+    resizeMode: "contain",
   },
   left: {
     width: "25%",

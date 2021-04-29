@@ -16,7 +16,7 @@ const BikeItem = ({ item }) => {
       </View>
       <View style={styles.contentView}>
         {revisions.length > 0 ? (
-          revisions?.map((item) => <RevisionItem item={item} />)
+          revisions?.map((item) => <RevisionItem key={item._id} item={item} />)
         ) : (
           <Text style={styles.noInspections}>{strings.noInspections}</Text>
         )}

@@ -17,12 +17,12 @@ const ModelSelect = ({ models, navigation, route: { params }, ...props }) => {
   }, []);
 
   function onSelect(item) {
-    props.addBike({
+    const bike = {
       ...item,
       name: `${params.brand.name} ${item.name}`,
-    });
-    navigation.pop(2);
-    navigation.navigate("Home");
+    };
+
+    navigation.navigate("preview", { bike });
   }
 
   return (

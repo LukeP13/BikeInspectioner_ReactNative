@@ -40,9 +40,8 @@ const HomeScreen = ({ navigation, getBikes, bikes }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white,
     width: "100%",
-    marginVertical: 10,
+    marginVertical: 0,
   },
 });
 
