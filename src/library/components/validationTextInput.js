@@ -59,7 +59,6 @@ const ValidationTextInput = ({
   useEffect(() => {
     if (onValidChange) onValidChange(!error);
   }, [error]);
-  //(active && !error) || (!required && !active
 
   return (
     <View style={styles.container}>

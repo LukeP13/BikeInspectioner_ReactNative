@@ -27,4 +27,6 @@ export default strings = {
   previewName: "Name *",
   errorPreviewName: "Name required",
   addBikeButton: "Add",
+
+  labelName: "Name:",
 };

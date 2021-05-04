@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Text } from "react-native";
+import { Text, TextInput } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { colors } from "react-native-elements";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { ScreenContainer } from "react-native-screens";
 import strings from "../../../res/strings";
 import ValidationTextInput from "../../library/components/validationTextInput";
 import mycolors from "../../../res/colors";
 import { connect } from "react-redux";
 import * as ActionCreators from "../../actions";
+import RevisionEdit from "./RevisionEdit";
 
 const FinalPreview = ({ navigation, route: { params }, addBike }) => {
   const [finalBike, setFinalBike] = useState(params.bike);
@@ -19,15 +20,31 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
     navigation.navigate("Home");
   }
 
+  function onChange(item) {
+    console.log("Change revision", item);
+  }
+
   return (
     <ScreenContainer style={styles.container}>
-      <ValidationTextInput
-        placeholder={strings.previewName}
-        value={finalBike.name}
-        onChangeText={(val) => setFinalBike({ ...finalBike, name: val })}
-        errorMessage={strings.errorPreviewName}
-        required
-      />
+      <View style={styles.titleView}>
+        <Text style={styles.labelText}>{strings.labelName}</Text>
+        <TextInput
+          style={styles.titleText}
+          placeholder={strings.previewName}
+          value={finalBike.name}
+          onChangeText={(val) => setFinalBike({ ...finalBike, name: val })}
+          required
+        />
+      </View>
+
+      <View style={styles.revisionsView}>
+        <Text style={styles.labelText}>Revisions: </Text>
+        <ScrollView style={styles.scrollRevisions}>
+          {finalBike.revisions.map((item) => (
+            <RevisionEdit revision={item} onChange={() => onChange(item)} />
+          ))}
+        </ScrollView>
+      </View>
       <View style={styles.submitButtonView}>
         <TouchableOpacity onPress={onSelect} style={styles.submitButton}>
           <Text>{strings.addBikeButton}</Text>
@@ -50,9 +67,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   submitButtonView: {
-    position: "absolute",
-    bottom: 10,
-    right: 10,
+    alignSelf: "flex-end",
+    margin: 10,
   },
   submitButton: {
     zIndex: 20,
@@ -64,6 +80,27 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.grey2,
     backgroundColor: mycolors.secondaryColor,
+  },
+  titleView: {
+    marginTop: 10,
+    borderBottomWidth: 0.5,
+    width: "90%",
+  },
+  titleText: {
+    fontSize: 25,
+    fontWeight: "bold",
+    paddingHorizontal: 3,
+  },
+  labelText: {
+    fontStyle: "italic",
+    fontWeight: "100",
+    color: colors.grey2,
+  },
+  revisionsView: {
+    flex: 1,
+    width: "95%",
+    marginTop: 30,
+    backgroundColor: colors.grey4,
   },
 });
 
