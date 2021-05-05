@@ -9,10 +9,11 @@ import ValidationTextInput from "../../library/components/validationTextInput";
 import mycolors from "../../../res/colors";
 import { connect } from "react-redux";
 import * as ActionCreators from "../../actions";
-import RevisionEdit from "./RevisionEdit";
+import RevisionEdit from "./revisionEdit";
 
 const FinalPreview = ({ navigation, route: { params }, addBike }) => {
   const [finalBike, setFinalBike] = useState(params.bike);
+  const { name, revisions } = finalBike;
 
   function onSelect() {
     addBike(finalBike);
@@ -20,8 +21,23 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
     navigation.navigate("Home");
   }
 
-  function onChange(item) {
-    console.log("Change revision", item);
+  function onChangeRevision(item, change) {
+    setFinalBike({
+      ...finalBike,
+      revisions: finalBike.revisions.map((i) =>
+        i._id === item._id ? { ...i, ...change } : i
+      ),
+    });
+  }
+
+  function onDelete({ _id }) {
+    setFinalBike({
+      ...finalBike,
+      revisions: finalBike.revisions.splice(
+        finalBike.revisions.findIndex((item) => item._id === _id),
+        1
+      ),
+    });
   }
 
   return (
@@ -31,7 +47,7 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
         <TextInput
           style={styles.titleText}
           placeholder={strings.previewName}
-          value={finalBike.name}
+          value={name}
           onChangeText={(val) => setFinalBike({ ...finalBike, name: val })}
           required
         />
@@ -40,8 +56,13 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
       <View style={styles.revisionsView}>
         <Text style={styles.labelText}>Revisions: </Text>
         <ScrollView style={styles.scrollRevisions}>
-          {finalBike.revisions.map((item) => (
-            <RevisionEdit revision={item} onChange={() => onChange(item)} />
+          {revisions.map((item, i) => (
+            <RevisionEdit
+              key={i}
+              revision={item}
+              onChange={onChangeRevision.bind(null, item)}
+              onDelete={onDelete.bind(null, index)}
+            />
           ))}
         </ScrollView>
       </View>
@@ -84,7 +105,7 @@ const styles = StyleSheet.create({
   titleView: {
     marginTop: 10,
     borderBottomWidth: 0.5,
-    width: "90%",
+    width: "95%",
   },
   titleText: {
     fontSize: 25,
@@ -100,7 +121,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "95%",
     marginTop: 30,
-    backgroundColor: colors.grey4,
   },
 });
 

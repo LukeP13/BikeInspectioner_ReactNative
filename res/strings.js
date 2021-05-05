@@ -18,6 +18,8 @@ export default strings = {
   nextInspect: "Incoming revisions",
   noInspections: "No inspections",
 
+  years: "years",
+  months: "months",
   days: "days",
   hours: "hours",
   minutes: "minutes",
