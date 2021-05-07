@@ -14,7 +14,7 @@ const ModelSelect = ({ models, navigation, route: { params }, ...props }) => {
   useEffect(() => {
     //Load data
     props.getModels(_id).then(({ error }) => error || setLoaded(true));
-  }, []);
+  }, [navigation]);
 
   function onSelect(item) {
     const bike = {

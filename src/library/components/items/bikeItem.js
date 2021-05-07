@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { colors } from "react-native-elements";
-import strings from "../../res/strings";
-import globalStyles from "../styles/styles";
+import strings from "../../../../res/strings";
+import globalStyles from "../../../styles/styles";
 import RevisionItem from "./revisionItem";
 
 const BikeItem = ({ item }) => {

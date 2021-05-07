@@ -41,7 +41,11 @@ export function convertMiliseconds(miliseconds, format) {
 }
 
 export function formatTime(time) {
-  const { days } = convertMiliseconds(time);
+  const { years, months, days } = convertMiliseconds(time);
 
-  return `${days} ${strings.days}`;
+  return `${
+    years ? `${years} ${year > 1 ? strings.years : strings.year}` : ""
+  } ${
+    months ? `${months} ${months > 1 ? strings.months : strings.month}` : ""
+  } ${days ? `${days} ${days > 1 ? strings.days : strings.day}` : ""}`;
 }

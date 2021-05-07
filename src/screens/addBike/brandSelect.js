@@ -13,7 +13,7 @@ const BrandSelect = ({ brands, navigation, ...props }) => {
   useEffect(() => {
     //Load data
     props.getBrands().then(({ error }) => error || setLoaded(true));
-  }, []);
+  }, [navigation]);
 
   function onSelect(val) {
     navigation.navigate("modelSelect", { brand: val });

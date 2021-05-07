@@ -5,10 +5,20 @@ import { colors } from "react-native-elements";
 import { ScreenContainer } from "react-native-screens";
 import { connect } from "react-redux";
 import images from "../../../res/images";
+import strings from "../../../res/strings";
 import AppScreenContainer from "../../library/components/appScreenContainer";
 import globalStyles from "../../styles/styles";
 
 const AddBikeScreen = ({ navigation }) => {
+  function onCustomBike() {
+    const bike = {
+      revisions: [],
+      name: strings.newBike,
+    };
+
+    navigation.navigate("preview", { bike });
+  }
+
   return (
     <AppScreenContainer navigation={navigation} title="Add Bike">
       <View style={styles.container}>
@@ -18,7 +28,7 @@ const AddBikeScreen = ({ navigation }) => {
         >
           <Text style={styles.selectButtonText}>Select Model</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.selectButton} onPress={() => {}}>
+        <TouchableOpacity style={styles.selectButton} onPress={onCustomBike}>
           <Text style={styles.selectButtonText}>Custom bike</Text>
         </TouchableOpacity>
       </View>

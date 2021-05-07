@@ -9,8 +9,7 @@ import colors from "../../res/colors";
 
 import * as ActionCreators from "../actions";
 import AppScreenContainer from "../library/components/appScreenContainer";
-import BikeItem from "./bikeItem";
-/* TODO: List */
+import BikeItem from "../library/components/items/bikeItem";
 
 const HomeScreen = ({ navigation, getBikes, bikes }) => {
   const [loaded, setLoaded] = useState(false);
@@ -21,7 +20,7 @@ const HomeScreen = ({ navigation, getBikes, bikes }) => {
         setLoaded(true);
       }
     });
-  }, []);
+  }, [navigation]);
 
   return (
     <AppScreenContainer navigation={navigation}>

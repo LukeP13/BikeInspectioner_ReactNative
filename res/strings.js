@@ -3,6 +3,7 @@ export default strings = {
   passwordLabel: "Password",
   forgotLabel: "Forgot password?",
   loginButton: "LOGIN",
+  nextStep: "Next",
   registerLabel: "Create account",
   registerUsername: "Username *",
   registerEmail: "Email *",
@@ -10,6 +11,7 @@ export default strings = {
   registerRepeatPassword: "Repeat password *",
   registerPhone: "Phone  (Optional)",
   logout: "Logout",
+  send: "Send",
 
   brandSelectTitle: "Select brand",
   modelSelectTitle: "Select model",
@@ -19,16 +21,23 @@ export default strings = {
   noInspections: "No inspections",
 
   years: "years",
+  year: "year",
   months: "months",
+  month: "month",
   days: "days",
+  day: "day",
   hours: "hours",
+  hour: "hour",
   minutes: "minutes",
+  minute: "minute",
   seconds: "seconds",
   or: "or",
 
   previewName: "Name *",
   errorPreviewName: "Name required",
-  addBikeButton: "Add",
+  addBikeButton: "Add bike",
+  newRevisionButton: "+",
 
   labelName: "Name:",
+  newBike: "New bike",
 };

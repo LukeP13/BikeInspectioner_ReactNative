@@ -40,6 +40,16 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
     });
   }
 
+  function newRevision() {
+    setFinalBike({
+      ...finalBike,
+      revisions: [
+        ...finalBike.revisions,
+        { name: "new", time: 0, distance: 0 },
+      ],
+    });
+  }
+
   return (
     <ScreenContainer style={styles.container}>
       <View style={styles.titleView}>
@@ -61,12 +71,15 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
               key={i}
               revision={item}
               onChange={onChangeRevision.bind(null, item)}
-              onDelete={onDelete.bind(null, index)}
+              onDelete={onDelete.bind(null, item)}
             />
           ))}
         </ScrollView>
       </View>
       <View style={styles.submitButtonView}>
+        <TouchableOpacity onPress={newRevision} style={styles.submitButton}>
+          <Text>{strings.newRevisionButton}</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={onSelect} style={styles.submitButton}>
           <Text>{strings.addBikeButton}</Text>
         </TouchableOpacity>
@@ -88,19 +101,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   submitButtonView: {
-    alignSelf: "flex-end",
-    margin: 10,
+    width: "90%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginRight: 10,
+    marginLeft: 5,
+    marginTop: 10,
+    marginBottom: 5,
   },
   submitButton: {
     zIndex: 20,
-    width: 60,
+    width: 80,
     height: 30,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 2,
     borderWidth: 1,
     borderColor: colors.grey2,
-    backgroundColor: mycolors.secondaryColor,
+    paddingHorizontal: 5,
   },
   titleView: {
     marginTop: 10,
@@ -121,6 +139,9 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "95%",
     marginTop: 30,
+  },
+  scrollRevisions: {
+    paddingRight: 10,
   },
 });
 

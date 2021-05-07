@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { formatTime } from "../library/functions/convertMS";
-import globalStyles from "../styles/styles";
+import { formatTime } from "../../functions/convertMS";
+import globalStyles from "../../../styles/styles";
 
 const RevisionItem = ({ item }) => {
   const { name, distance, time } = item;

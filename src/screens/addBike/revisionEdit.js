@@ -10,7 +10,6 @@ import {
 } from "../../library/functions/convertMS";
 import { range } from "../../library/functions/utilities";
 
-const distances = range(500, 10000, 500);
 const TIME = {
   SECOND: 1000,
   MINUTE: 1000 * 60,
@@ -57,7 +56,7 @@ const RevisionEdit = ({ revision, onChange, onDelete = null }) => {
           selectedValue={distance}
           onValueChange={(distance) => onChange({ distance })}
         >
-          {distances.map((item, i) => (
+          {range(0, 10000, 500).map((item, i) => (
             <Picker.Item key={i} label={`${item}`} value={item} />
           ))}
         </Picker>

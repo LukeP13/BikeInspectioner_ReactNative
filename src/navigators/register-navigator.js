@@ -1,25 +1,25 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import SignIn from "../screens/signin";
+import Register from "../screens/register";
 import { StackNavHeaderOptions } from "./headerStyles";
-import registerNavigator from "./register-navigator";
+import Details from "../screens/register/details";
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default AuthNavigator = () => (
+export default RegisterNavigator = () => (
   <Navigator>
     <Screen
-      name="SignIn"
-      component={SignIn}
+      name="Register"
+      component={Register}
       options={StackNavHeaderOptions.primary}
     />
     <Screen
-      name="Register"
-      component={registerNavigator}
+      name="Details"
+      component={Details}
       options={{
         ...StackNavHeaderOptions.secondary,
-        title: "New account",
+        title: "Rider details",
       }}
     />
   </Navigator>

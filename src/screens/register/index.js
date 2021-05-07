@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ScreenContainer } from "react-native-screens";
-import mycolors from "../../res/colors";
-import strings from "../../res/strings";
+import mycolors from "../../../res/colors";
+import strings from "../../../res/strings";
 
-import ValidationTextInput from "../library/components/validationTextInput";
+import ValidationTextInput from "../../library/components/validationTextInput";
 
 const Register = () => {
   const [username, setUsername] = useState("");
