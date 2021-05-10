@@ -4,6 +4,8 @@ import { StyleSheet, View } from "react-native";
 import { ScreenContainer } from "react-native-screens";
 import { range } from "../../library/functions/utilities";
 
+/***  Not USED ****/
+
 const Details = ({ navigation, route: { params } }) => {
   const [user, setUser] = useState(params.user);
   const { distancePerYear = 500 } = user;

@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import SignIn from "../screens/signin";
 import { StackNavHeaderOptions } from "./headerStyles";
-import registerNavigator from "./register-navigator";
+import Register from "../screens/register";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -16,7 +16,7 @@ export default AuthNavigator = () => (
     />
     <Screen
       name="Register"
-      component={registerNavigator}
+      component={Register}
       options={{
         ...StackNavHeaderOptions.secondary,
         title: "New account",

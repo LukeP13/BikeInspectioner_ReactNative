@@ -20,7 +20,7 @@ const TIME = {
 };
 
 const RevisionEdit = ({ revision, onChange, onDelete = null }) => {
-  const units = "KM";
+  const units = strings.km;
   const { name, distance, time } = revision;
 
   const timeConverted = convertMiliseconds(time);

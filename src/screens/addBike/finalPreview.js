@@ -10,10 +10,12 @@ import mycolors from "../../../res/colors";
 import { connect } from "react-redux";
 import * as ActionCreators from "../../actions";
 import RevisionEdit from "./revisionEdit";
+import { Picker } from "@react-native-community/picker";
+import { range } from "../../library/functions/utilities";
 
 const FinalPreview = ({ navigation, route: { params }, addBike }) => {
   const [finalBike, setFinalBike] = useState(params.bike);
-  const { name, revisions } = finalBike;
+  const { name, revisions, distancePerYear } = finalBike;
 
   function onSelect() {
     addBike(finalBike);
@@ -61,6 +63,24 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
           onChangeText={(val) => setFinalBike({ ...finalBike, name: val })}
           required
         />
+      </View>
+
+      <View style={styles.distanceContainer}>
+        <Text style={styles.labelText}>{strings.labelDistPerYear}</Text>
+        <View style={styles.distanceView}>
+          <Picker
+            style={styles.distancePicker}
+            selectedValue={distancePerYear}
+            onValueChange={(distancePerYear) =>
+              setFinalBike({ ...finalBike, distancePerYear })
+            }
+          >
+            {range(0, 10000, 500).map((item, i) => (
+              <Picker.Item key={i} label={`${item}`} value={item} />
+            ))}
+          </Picker>
+          <Text>{`${strings.km} / ${strings.year}`.toUpperCase()}</Text>
+        </View>
       </View>
 
       <View style={styles.revisionsView}>
@@ -138,10 +158,24 @@ const styles = StyleSheet.create({
   revisionsView: {
     flex: 1,
     width: "95%",
-    marginTop: 30,
+    marginTop: 20,
   },
   scrollRevisions: {
     paddingRight: 10,
+  },
+  distanceContainer: {
+    marginTop: 20,
+    width: "95%",
+    borderBottomWidth: 0.5,
+  },
+  distanceView: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  distancePicker: {
+    height: 35,
+    width: 105,
+    padding: 0,
   },
 });
 

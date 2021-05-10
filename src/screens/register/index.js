@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ScreenContainer } from "react-native-screens";
+import { connect } from "react-redux";
 import mycolors from "../../../res/colors";
 import strings from "../../../res/strings";
+import * as ActionCreators from "../../actions";
+import TimeoutText from "../../library/components/timeoutText";
 
 import ValidationTextInput from "../../library/components/validationTextInput";
 
-const Register = () => {
+const Register = ({ navigation, ...props }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -20,6 +23,8 @@ const Register = () => {
     email: false,
     phone: true,
   });
+
+  const [message, setMessage] = useState("");
 
   function sendEnabled() {
     for (let o in form) if (!form[o]) return false;
@@ -35,7 +40,15 @@ const Register = () => {
   }
 
   function register() {
-    console.log("register");
+    setMessage("");
+
+    props
+      .register(username, email, password, phone)
+      .then(({ error }) => {
+        if (error) setMessage(error);
+        else navigation.pop(1);
+      })
+      .catch((_) => setMessage("Network error!"));
   }
 
   return (
@@ -85,6 +98,9 @@ const Register = () => {
         onValidChange={(val) => onValidChange("phone", val)}
         type="phone"
       />
+
+      <TimeoutText value={message} timeout={1500} />
+
       <TouchableOpacity
         style={[styles.registerBtn, !sendEnabled() && styles.disabledButton]}
         onPress={register}
@@ -131,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Register;
+export default connect(null, ActionCreators)(Register);

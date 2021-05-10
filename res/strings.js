@@ -39,5 +39,7 @@ export default strings = {
   newRevisionButton: "+",
 
   labelName: "Name:",
+  labelDistPerYear: "Distance per year:",
   newBike: "New bike",
+  km: "KM",
 };

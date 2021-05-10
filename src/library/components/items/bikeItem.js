@@ -7,7 +7,6 @@ import RevisionItem from "./revisionItem";
 
 const BikeItem = ({ item }) => {
   const { _id, name, revisions } = item;
-  console.log(item);
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.titleView}>
