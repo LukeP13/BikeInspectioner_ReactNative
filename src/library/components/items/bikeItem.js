@@ -6,7 +6,7 @@ import globalStyles from "../../../styles/styles";
 import RevisionItem from "./revisionItem";
 
 const BikeItem = ({ item }) => {
-  const { _id, name, revisions } = item;
+  const { _id, name, incomingRevisions } = item;
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.titleView}>
@@ -14,8 +14,10 @@ const BikeItem = ({ item }) => {
         <Text style={styles.otherText}>{strings.nextInspect}</Text>
       </View>
       <View style={styles.contentView}>
-        {revisions.length > 0 ? (
-          revisions?.map((item) => <RevisionItem key={item._id} item={item} />)
+        {incomingRevisions.length > 0 ? (
+          incomingRevisions?.map((item) => (
+            <RevisionItem key={item._id} item={item} />
+          ))
         ) : (
           <Text style={styles.noInspections}>{strings.noInspections}</Text>
         )}

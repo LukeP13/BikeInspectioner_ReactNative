@@ -3,4 +3,5 @@ export default images = {
   logo_sm: require("./images/logoBI_xs.png"),
   menu: require("./images/menuTouchable.png"),
   brandsLogo: require("./images/motorcycleBrands.png"),
+  closeImage: require("./images/closeIcon.png"),
 };

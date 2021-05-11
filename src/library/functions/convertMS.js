@@ -45,7 +45,9 @@ export function formatTime(time) {
 
   return `${
     years ? `${years} ${year > 1 ? strings.years : strings.year}` : ""
-  } ${
+  }${years && months ? " " : ""}${
     months ? `${months} ${months > 1 ? strings.months : strings.month}` : ""
-  } ${days ? `${days} ${days > 1 ? strings.days : strings.day}` : ""}`;
+  }${months && days ? " " : ""}${
+    days ? `${days} ${days > 1 ? strings.days : strings.day}` : ""
+  }`;
 }

@@ -1,7 +1,8 @@
 import { Picker } from "@react-native-community/picker";
 import React, { useEffect, useState } from "react";
 import { TextInput } from "react-native";
-import { StyleSheet, View, Text } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import { colors } from "react-native-elements";
 import strings from "../../../res/strings";
 import {
@@ -9,7 +10,7 @@ import {
   formatTime,
 } from "../../library/functions/convertMS";
 import { range } from "../../library/functions/utilities";
-
+import images from "../../../res/images";
 const TIME = {
   SECOND: 1000,
   MINUTE: 1000 * 60,
@@ -48,6 +49,9 @@ const RevisionEdit = ({ revision, onChange, onDelete = null }) => {
           value={name}
           onChangeText={(name) => onChange({ name })}
         />
+        <TouchableOpacity onPress={onDelete}>
+          <Image source={images.closeImage} style={styles.closeImage} />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.viewContainer}>
@@ -118,9 +122,12 @@ const styles = StyleSheet.create({
   },
   nameView: {
     borderBottomWidth: 0.3,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   nameText: {
     fontSize: 17,
+    flex: 1,
   },
   distanceView: {
     flexDirection: "row",
@@ -160,6 +167,10 @@ const styles = StyleSheet.create({
   timeLabel: {
     marginLeft: -10,
     fontSize: 12,
+  },
+  closeImage: {
+    width: 20,
+    height: 20,
   },
 });
 

@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { StatusBar } from "react-native";
-import { View } from "react-native";
-import { Button, SafeAreaView, StyleSheet, Text } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { ScreenContainer } from "react-native-screens";
 import { connect } from "react-redux";
-import colors from "../../res/colors";
+import { useFocusEffect } from "@react-navigation/native";
 
 import * as ActionCreators from "../actions";
 import AppScreenContainer from "../library/components/appScreenContainer";
@@ -14,13 +11,15 @@ import BikeItem from "../library/components/items/bikeItem";
 const HomeScreen = ({ navigation, getBikes, bikes }) => {
   const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    getBikes().then(({ error, payload }) => {
-      if (!error) {
-        setLoaded(true);
-      }
-    });
-  }, [navigation]);
+  useFocusEffect(
+    React.useCallback(() => {
+      getBikes().then(({ error, payload }) => {
+        if (!error) {
+          setLoaded(true);
+        }
+      });
+    }, [navigation])
+  );
 
   return (
     <AppScreenContainer navigation={navigation}>

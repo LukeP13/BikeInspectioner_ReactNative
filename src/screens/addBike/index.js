@@ -14,6 +14,8 @@ const AddBikeScreen = ({ navigation }) => {
     const bike = {
       revisions: [],
       name: strings.newBike,
+      distancePerYear: 0,
+      totalDistance: 0,
     };
 
     navigation.navigate("preview", { bike });

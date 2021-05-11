@@ -15,7 +15,7 @@ import { range } from "../../library/functions/utilities";
 
 const FinalPreview = ({ navigation, route: { params }, addBike }) => {
   const [finalBike, setFinalBike] = useState(params.bike);
-  const { name, revisions, distancePerYear } = finalBike;
+  const { name, revisions, distancePerYear, totalDistance } = finalBike;
 
   function onSelect() {
     addBike(finalBike);
@@ -23,23 +23,23 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
     navigation.navigate("Home");
   }
 
-  function onChangeRevision(item, change) {
+  function onChangeRevision(index, change) {
     setFinalBike({
       ...finalBike,
-      revisions: finalBike.revisions.map((i) =>
-        i._id === item._id ? { ...i, ...change } : i
+      revisions: finalBike.revisions.map((it, ind) =>
+        index === ind ? { ...it, ...change } : it
       ),
     });
   }
 
-  function onDelete({ _id }) {
-    setFinalBike({
+  function onDelete(index) {
+    let revisions = [...finalBike.revisions];
+    revisions.splice(index, 1);
+    const bike = {
       ...finalBike,
-      revisions: finalBike.revisions.splice(
-        finalBike.revisions.findIndex((item) => item._id === _id),
-        1
-      ),
-    });
+      revisions,
+    };
+    setFinalBike(bike);
   }
 
   function newRevision() {
@@ -64,38 +64,55 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
           required
         />
       </View>
-
-      <View style={styles.distanceContainer}>
-        <Text style={styles.labelText}>{strings.labelDistPerYear}</Text>
-        <View style={styles.distanceView}>
-          <Picker
-            style={styles.distancePicker}
-            selectedValue={distancePerYear}
-            onValueChange={(distancePerYear) =>
-              setFinalBike({ ...finalBike, distancePerYear })
-            }
-          >
-            {range(0, 10000, 500).map((item, i) => (
-              <Picker.Item key={i} label={`${item}`} value={item} />
-            ))}
-          </Picker>
-          <Text>{`${strings.km} / ${strings.year}`.toUpperCase()}</Text>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.distanceContainer}>
+          <Text style={styles.labelText}>{strings.labelTotalDistance}</Text>
+          <View style={styles.distanceView}>
+            <TextInput
+              style={styles.totalDistanceText}
+              value={totalDistance.toString()}
+              onChangeText={(totalDistance) =>
+                setFinalBike({
+                  ...finalBike,
+                  totalDistance: parseInt(totalDistance),
+                })
+              }
+              keyboardType="numeric"
+            />
+            <Text>{`${strings.km}`.toUpperCase()}</Text>
+          </View>
         </View>
-      </View>
 
-      <View style={styles.revisionsView}>
-        <Text style={styles.labelText}>Revisions: </Text>
-        <ScrollView style={styles.scrollRevisions}>
+        <View style={styles.distanceContainer}>
+          <Text style={styles.labelText}>{strings.labelDistPerYear}</Text>
+          <View style={styles.distanceView}>
+            <Picker
+              style={styles.distancePicker}
+              selectedValue={distancePerYear}
+              onValueChange={(distancePerYear) =>
+                setFinalBike({ ...finalBike, distancePerYear })
+              }
+            >
+              {range(0, 10000, 500).map((item, i) => (
+                <Picker.Item key={i} label={`${item}`} value={item} />
+              ))}
+            </Picker>
+            <Text>{`${strings.km} / ${strings.year}`.toUpperCase()}</Text>
+          </View>
+        </View>
+
+        <View style={styles.revisionsView}>
+          <Text style={styles.labelText}>Revisions: </Text>
           {revisions.map((item, i) => (
             <RevisionEdit
               key={i}
               revision={item}
-              onChange={onChangeRevision.bind(null, item)}
-              onDelete={onDelete.bind(null, item)}
+              onChange={onChangeRevision.bind(null, i)}
+              onDelete={onDelete.bind(null, i)}
             />
           ))}
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
       <View style={styles.submitButtonView}>
         <TouchableOpacity onPress={newRevision} style={styles.submitButton}>
           <Text>{strings.newRevisionButton}</Text>
@@ -112,13 +129,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    marginHorizontal: 10,
-    marginBottom: 15,
-    marginTop: 5,
-    padding: 10,
+    marginHorizontal: 5,
+    marginBottom: 5,
     borderRadius: 5,
     elevation: 1,
     alignItems: "center",
+    paddingBottom: 5,
   },
   submitButtonView: {
     width: "90%",
@@ -141,9 +157,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   titleView: {
-    marginTop: 10,
-    borderBottomWidth: 0.5,
-    width: "95%",
+    width: "100%",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderBottomWidth: 1,
+    marginBottom: 5,
   },
   titleText: {
     fontSize: 25,
@@ -157,25 +175,30 @@ const styles = StyleSheet.create({
   },
   revisionsView: {
     flex: 1,
-    width: "95%",
     marginTop: 20,
   },
-  scrollRevisions: {
-    paddingRight: 10,
+  scrollView: {
+    paddingHorizontal: 10,
+    width: "95%",
   },
   distanceContainer: {
     marginTop: 20,
-    width: "95%",
     borderBottomWidth: 0.5,
   },
   distanceView: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
   },
   distancePicker: {
     height: 35,
     width: 105,
     padding: 0,
+  },
+  totalDistanceText: {
+    paddingTop: 2,
+    fontSize: 16,
+    paddingLeft: 6,
   },
 });
 
