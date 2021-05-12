@@ -29,10 +29,6 @@ export function logout() {
   return (dispatch) =>
     Api.logout().then(
       (_) => dispatch({ type: LOGOUT }),
-      (err) =>
-        dispatch({
-          type: ERROR,
-          error: err.response.data && err.response.data.message,
-        })
+      (err) => dispatch({ type: LOGOUT })
     );
 }

@@ -17,10 +17,11 @@ const firebaseConfig = {
   storageBucket: "bikeinspectioner.appspot.com",
 };
 
-export default fireBaseInit = () => {
+export const fireBaseInit = () => {
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
   } else {
     firebase.app(); // if already initialized, use that one
   }
+  return firebase;
 };

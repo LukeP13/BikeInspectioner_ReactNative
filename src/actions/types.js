@@ -11,3 +11,5 @@ export const GOT_BRAND = "GOT_BRAND";
 export const GOT_MODELS = "GOT_MODELS";
 
 export const GOT_BIKES = "GOT_BIKES";
+
+export const GOT_FCMTOKEN = "GOT_FCMTOKEN";

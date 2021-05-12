@@ -9,8 +9,8 @@ import AppScreenContainer from "../../library/components/appScreenContainer";
 
 const ProfileScreen = ({ navigation, logout }) => {
   function onLogout() {
-    navigation.navigate("Home");
     logout();
+    navigation.navigate("Home");
   }
 
   return (

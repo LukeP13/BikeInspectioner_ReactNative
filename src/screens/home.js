@@ -13,11 +13,16 @@ const HomeScreen = ({ navigation, getBikes, bikes }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      getBikes().then(({ error, payload }) => {
-        if (!error) {
-          setLoaded(true);
-        }
-      });
+      let isActive = true;
+
+      isActive &&
+        getBikes().then(({ error }) => {
+          !error && setLoaded(true);
+        });
+
+      return () => {
+        isActive = false;
+      };
     }, [navigation])
   );
 

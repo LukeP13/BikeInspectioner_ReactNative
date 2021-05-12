@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import generalInfoReducer from "./generalInfo";
 import authReducer from "./reducer-auth";
 import bikeReducer from "./reducer-bike";
+import notificationsReducer from "./reducer-notifications";
 
 const rootReducer = combineReducers({
   general: generalInfoReducer,
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
   //Personal info
   auth: authReducer,
   bikes: bikeReducer,
+  notifications: notificationsReducer,
 });
 
 export default rootReducer;
