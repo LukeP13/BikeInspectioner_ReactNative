@@ -1,31 +1,32 @@
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
+import Constants from "expo-constants";
 
-async function registerForPushNotificationsAsync() {
-  const { status: existingStatus } = await Permissions.getAsync(
-    Permissions.NOTIFICATIONS
-  );
-  let finalStatus = existingStatus;
-
-  if (existingStatus !== "granted") {
-    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-    finalStatus = status;
-  }
-
-  // Stop here if the user did not grant permissions
-  if (finalStatus !== "granted") {
-    return;
-  }
-
-  try {
-    // Get the token that uniquely identifies this device
-    let token = (await Notifications.getExpoPushTokenAsync()).data;
-
-    //SAVE TOKEN to reducer for when login
+const registerForPushNotificationsAsync = async () => {
+  if (Constants.isDevice) {
+    const { status: existingStatus } =
+      await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== "granted") {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== "granted") {
+      return { error: "Failed to get push token for push notification!" };
+    }
+    const token = (await Notifications.getExpoPushTokenAsync()).data;
+    if (Platform.OS === "android") {
+      Notifications.setNotificationChannelAsync("default", {
+        name: "default",
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: "#FF231F7C",
+      });
+    }
     return { token };
-  } catch (error) {
-    return { error };
+  } else {
+    return { error: "Must use physical device for Push Notifications" };
   }
-}
+};
 
 export default registerForPushNotificationsAsync;

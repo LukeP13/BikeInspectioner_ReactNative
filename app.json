@@ -25,11 +25,13 @@
       }
     },
     "android": {
+      "googleServicesFile": "./android/google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./res/images/iconBI.png",
         "backgroundColor": "#FFFFFF"
       },
-      "userInterfaceStyle": "light"
+      "userInterfaceStyle": "light",
+      "package": "tfg.bikeinspectioner"
     },
     "web": {
       "favicon": "./res/images/favicon.png"

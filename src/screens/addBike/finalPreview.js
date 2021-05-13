@@ -17,8 +17,15 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
   const [finalBike, setFinalBike] = useState(params.bike);
   const { name, revisions, distancePerYear, totalDistance } = finalBike;
 
-  function onSelect() {
-    addBike(finalBike);
+  function onSubmit() {
+    addBike({
+      ...finalBike,
+      revisions: finalBike.revisions.map((i) => ({
+        ...i,
+        distance: i.distance > 0 ? i.distance : null,
+        time: i.time > 0 ? i.time : null,
+      })),
+    });
     navigation.pop(3);
     navigation.navigate("Home");
   }
@@ -117,7 +124,7 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
         <TouchableOpacity onPress={newRevision} style={styles.submitButton}>
           <Text>{strings.newRevisionButton}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={onSelect} style={styles.submitButton}>
+        <TouchableOpacity onPress={onSubmit} style={styles.submitButton}>
           <Text>{strings.addBikeButton}</Text>
         </TouchableOpacity>
       </View>
