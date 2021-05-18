@@ -44,7 +44,7 @@ export function formatTime(time) {
   const { years, months, days } = convertMiliseconds(time);
 
   return `${
-    years ? `${years} ${year > 1 ? strings.years : strings.year}` : ""
+    years ? `${years} ${years > 1 ? strings.years : strings.year}` : ""
   }${years && months ? " " : ""}${
     months ? `${months} ${months > 1 ? strings.months : strings.month}` : ""
   }${months && days ? " " : ""}${

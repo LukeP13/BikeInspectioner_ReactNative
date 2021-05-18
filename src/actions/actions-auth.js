@@ -1,10 +1,14 @@
 import Api from "../controllers/api";
-import { LOGIN, LOGOUT, REGISTER, ERROR } from "./types";
+import { LOGIN, LOGOUT, REGISTER, ERROR, ENABLE_NOTIFICATIONS } from "./types";
 
 export function login(username, password, token) {
   return (dispatch) =>
     Api.login({ username, password, notificationToken: token }).then(
-      (response) => dispatch({ type: LOGIN, payload: response.data }),
+      (response) =>
+        Promise.all(
+          dispatch({ type: LOGIN, payload: response.data }),
+          token && dispatch({ type: ENABLE_NOTIFICATIONS })
+        ),
       (err) =>
         dispatch({
           type: ERROR,

@@ -4,4 +4,4 @@ export * from "./actions-brands";
 
 export * from "./actions-bike";
 
-export * from "./actions-firebase";
+export * from "./actions-notifications";

@@ -27,7 +27,7 @@ const SignIn = ({ navigation, login, fcmToken }) => {
   async function onLogin() {
     setMessage("");
 
-    login(username, password, fcmToken)
+    (fcmToken ? login(username, password, fcmToken) : login(username, password))
       .then(({ error }) => {
         if (error) setMessage(error);
       })

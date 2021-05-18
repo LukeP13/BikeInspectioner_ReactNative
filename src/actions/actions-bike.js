@@ -16,3 +16,19 @@ export function addBike(modelId) {
       () => dispatch({ type: ERROR })
     );
 }
+
+export function patchBike(bikeId, patchBody) {
+  return (dispatch) =>
+    Api.patchBike(bikeId, patchBody).then(
+      () => getBikes()(dispatch),
+      () => dispatch({ type: ERROR })
+    );
+}
+
+export function patchRevision(bikeId, revisionId, patchBody) {
+  return (dispatch) =>
+    Api.patchRevision(bikeId, revisionId, patchBody).then(
+      () => getBikes()(dispatch),
+      () => dispatch({ type: ERROR })
+    );
+}

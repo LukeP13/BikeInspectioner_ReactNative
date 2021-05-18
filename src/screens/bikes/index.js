@@ -4,13 +4,12 @@ import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
 
-import * as ActionCreators from "../actions";
-import AppScreenContainer from "../library/components/appScreenContainer";
-import BikeItem from "../library/components/items/bikeItem";
+import * as ActionCreators from "../../actions";
+import AppScreenContainer from "../../library/components/appScreenContainer";
+import BikeItem from "../../library/components/items/bikeItem";
 
-const HomeScreen = ({ navigation, getBikes, bikes }) => {
+const ListBikesScreen = ({ navigation, getBikes, bikes }) => {
   const [loaded, setLoaded] = useState(false);
-
   useFocusEffect(
     React.useCallback(() => {
       let isActive = true;
@@ -31,7 +30,11 @@ const HomeScreen = ({ navigation, getBikes, bikes }) => {
       <ScrollView style={styles.container}>
         {loaded ? (
           (bikes || []).map((item, i) => (
-            <BikeItem key={item._id} item={item} />
+            <BikeItem
+              key={item._id}
+              item={item}
+              onPress={() => navigation.navigate("Details", { bike: item })}
+            />
           ))
         ) : (
           <></>
@@ -54,4 +57,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, ActionCreators)(HomeScreen);
+export default connect(mapStateToProps, ActionCreators)(ListBikesScreen);

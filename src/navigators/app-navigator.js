@@ -1,28 +1,26 @@
-import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import HomeScreen from '../screens/home';
-import AddBikeNavigator from './addBike-navigator';
-import ProfileScreen from '../screens/profile';
+import React from "react";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import AddBikeNavigator from "./addBike-navigator";
+import ProfileScreen from "../screens/profile";
+import BikeDetailsNavigator from "./bikeDetails-navigator";
+import { colors } from "react-native-elements";
 
 const { Navigator, Screen } = createDrawerNavigator();
 
 export default AppNavigator = () => (
-    <Navigator>
-        <Screen 
-            name="Home"
-            component={HomeScreen}
-            options={{ title: 'Home' }}
-        />
-        <Screen 
-            name="AddBike"
-            component={AddBikeNavigator}
-            options={{
-                title: "Add Bike"
-            }}
-        />
-        <Screen 
-            name="Profile"
-            component={ProfileScreen}
-        />
-    </Navigator>
-)
+  <Navigator drawerContentOptions={{ activeTintColor: colors.grey0 }}>
+    <Screen
+      name="Home"
+      component={BikeDetailsNavigator}
+      options={{ title: "Home" }}
+    />
+    <Screen
+      name="AddBike"
+      component={AddBikeNavigator}
+      options={{
+        title: "Add Bike",
+      }}
+    />
+    <Screen name="Profile" component={ProfileScreen} />
+  </Navigator>
+);

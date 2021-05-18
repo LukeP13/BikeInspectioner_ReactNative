@@ -1,5 +1,13 @@
-import React from "react";
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  StyleSheet,
+  Switch,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { colors } from "react-native-elements";
 import { ScreenContainer } from "react-native-screens";
 import { connect } from "react-redux";
 import strings from "../../../res/strings";
@@ -7,15 +15,38 @@ import strings from "../../../res/strings";
 import * as ActionCreators from "../../actions";
 import AppScreenContainer from "../../library/components/appScreenContainer";
 
-const ProfileScreen = ({ navigation, logout }) => {
+const ProfileScreen = ({
+  navigation,
+  logout,
+  notificationsEnabled,
+  ...props
+}) => {
+  const [isEnabled, setEnabled] = useState(notificationsEnabled);
+  const toggleSwitch = () => {
+    isEnabled ? props.disableNotifications() : props.enableNotifications();
+    setEnabled(!isEnabled);
+  };
+
+  useEffect(() => setEnabled(notificationsEnabled), [notificationsEnabled]);
+
   function onLogout() {
     logout();
-    navigation.navigate("Home");
   }
 
   return (
     <AppScreenContainer navigation={navigation} title="Profile">
       <View style={styles.container}>
+        <View style={styles.switchNotifications}>
+          <Text style={styles.notificationsText}>{strings.notifications}</Text>
+          <Switch
+            trackColor={{ false: "#767577", true: "#beddc4" }}
+            thumbColor={notificationsEnabled ? "#3dcc57" : "#f4f3f4"}
+            ios_backgroundColor="#5DC571"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+        </View>
+
         <TouchableOpacity style={styles.logoutButton} onPress={onLogout}>
           <Text style={styles.logoutText}>{strings.logout}</Text>
         </TouchableOpacity>
@@ -44,6 +75,22 @@ const styles = StyleSheet.create({
   logoutText: {
     fontSize: 25,
   },
+  switchNotifications: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: 150,
+  },
+  notificationsText: {
+    fontSize: 15,
+    fontWeight: "900",
+  },
 });
 
-export default connect(null, ActionCreators)(ProfileScreen);
+function mapStateToProps(state) {
+  return {
+    notificationsEnabled: state.notifications.enabled,
+  };
+}
+
+export default connect(mapStateToProps, ActionCreators)(ProfileScreen);

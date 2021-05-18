@@ -40,8 +40,10 @@ export default strings = {
 
   labelName: "Name:",
   labelDistPerYear: "Distance per year:",
-  labelTotalDistance: "Total distance traveled",
+  labelTotalDistance: "Total distance traveled:",
   newBike: "New bike",
-  km: "KM",
+  km: "Km",
   pendingRevision: "Pending...",
+  labelTotal: "Total:",
+  notifications: "Notifications",
 };

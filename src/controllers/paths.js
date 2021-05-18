@@ -7,3 +7,5 @@ export const brands = "brands";
 export const models = "models";
 
 export const bikes = "bikes";
+export const tokens = "tokens";
+export const revisions = "revisions";

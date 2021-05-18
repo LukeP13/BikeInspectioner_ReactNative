@@ -3,21 +3,28 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { colors } from "react-native-elements";
 import strings from "../../../../res/strings";
 import globalStyles from "../../../styles/styles";
+import { range } from "../../functions/utilities";
 import RevisionItem from "./revisionItem";
 
-const BikeItem = ({ item }) => {
+const BikeItem = ({ item, onPress }) => {
   const { _id, name, incomingRevisions } = item;
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.titleView}>
         <Text style={styles.titleText}>{name || _id}</Text>
         <Text style={styles.otherText}>{strings.nextInspect}</Text>
       </View>
       <View style={styles.contentView}>
         {incomingRevisions.length > 0 ? (
-          incomingRevisions?.map((item) => (
-            <RevisionItem key={item._id} item={item} />
-          ))
+          range(0, Math.min(incomingRevisions.length - 1, 3)).map((i) => {
+            console.log(incomingRevisions[i]);
+            return (
+              <RevisionItem
+                key={incomingRevisions[i]._id}
+                item={incomingRevisions[i]}
+              />
+            );
+          })
         ) : (
           <Text style={styles.noInspections}>{strings.noInspections}</Text>
         )}

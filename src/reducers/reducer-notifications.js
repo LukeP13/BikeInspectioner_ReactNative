@@ -1,7 +1,12 @@
-import { GOT_FCMTOKEN } from "../actions/types";
+import {
+  ENABLE_NOTIFICATIONS,
+  DISABLE_NOTIFICATIONS,
+  GOT_FCMTOKEN,
+} from "../actions/types";
 
 const initialState = {
-  token: "",
+  token: null,
+  enabled: false,
 };
 
 const notificationsReducer = (state = initialState, action) => {
@@ -11,9 +16,18 @@ const notificationsReducer = (state = initialState, action) => {
         ...state,
         token: action.payload,
       };
+    case ENABLE_NOTIFICATIONS:
+      return {
+        ...state,
+        enabled: true,
+      };
+    case DISABLE_NOTIFICATIONS:
+      return {
+        ...state,
+        enabled: false,
+      };
     default:
       return state;
   }
 };
-
 export default notificationsReducer;

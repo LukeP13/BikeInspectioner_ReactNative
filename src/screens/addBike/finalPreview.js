@@ -77,11 +77,11 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
           <View style={styles.distanceView}>
             <TextInput
               style={styles.totalDistanceText}
-              value={totalDistance.toString()}
+              value={`${totalDistance || ""}`}
               onChangeText={(totalDistance) =>
                 setFinalBike({
                   ...finalBike,
-                  totalDistance: parseInt(totalDistance),
+                  totalDistance: parseInt(totalDistance) || 0,
                 })
               }
               keyboardType="numeric"
