@@ -4,4 +4,5 @@ export default images = {
   menu: require("./images/menuTouchable.png"),
   brandsLogo: require("./images/motorcycleBrands.png"),
   closeImage: require("./images/closeIcon.png"),
+  editIcon: require("./images/editIcon.png"),
 };

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Text, TextInput } from "react-native";
+import { Alert, Text, TextInput } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { colors } from "react-native-elements";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { ScreenContainer } from "react-native-screens";
 import strings from "../../../res/strings";
-import ValidationTextInput from "../../library/components/validationTextInput";
 import mycolors from "../../../res/colors";
 import { connect } from "react-redux";
 import * as ActionCreators from "../../actions";
@@ -13,21 +12,64 @@ import RevisionEdit from "./revisionEdit";
 import { Picker } from "@react-native-community/picker";
 import { range } from "../../library/functions/utilities";
 
-const FinalPreview = ({ navigation, route: { params }, addBike }) => {
-  const [finalBike, setFinalBike] = useState(params.bike);
-  const { name, revisions, distancePerYear, totalDistance } = finalBike;
+const FinalPreview = ({
+  navigation,
+  route: {
+    params: { bike, edit },
+  },
+  addBike,
+  patchBike,
+  deleteBike,
+}) => {
+  const [finalBike, setFinalBike] = useState(bike);
+  const { _id, name, revisions, distancePerYear, totalDistance } = finalBike;
 
   function onSubmit() {
-    addBike({
-      ...finalBike,
-      revisions: finalBike.revisions.map((i) => ({
-        ...i,
-        distance: i.distance > 0 ? i.distance : null,
-        time: i.time > 0 ? i.time : null,
-      })),
-    });
-    navigation.pop(3);
-    navigation.navigate("Home");
+    if (edit) {
+      if (revisions != bike.revisions) {
+        const revisions = finalBike.revisions.map((i) => ({
+          ...i,
+          distance: i.distance > 0 ? i.distance : null,
+          time: i.time > 0 ? i.time : null,
+        }));
+        const patchBody = {
+          ...finalBike,
+          revisions,
+          incomingRevisions: revisions.map((a) => {
+            let b = finalBike.incomingRevisions.find(
+              (b) => b._id != null && b._id === a._id
+            );
+            return b != null ? b : a;
+          }),
+        };
+        Alert.alert(strings.alertEditTitle, strings.alertEditText, [
+          {
+            text: "Cancel",
+            style: "cancel",
+            onPress: () => navigation.pop(1),
+          },
+          {
+            text: "OK",
+            onPress: () =>
+              patchBike(_id, patchBody).then(() => navigation.pop(2)),
+          },
+        ]);
+      } else {
+        const { incomingRevisions, ...patchBody } = finalBike;
+        patchBike(_id, patchBody).then(() => navigation.pop(2));
+      }
+    } else {
+      addBike({
+        ...finalBike,
+        revisions: finalBike.revisions.map((i) => ({
+          ...i,
+          distance: i.distance > 0 ? i.distance : null,
+          time: i.time > 0 ? i.time : null,
+        })),
+      });
+      navigation.pop(3);
+      navigation.navigate("Home");
+    }
   }
 
   function onChangeRevision(index, change) {
@@ -46,16 +88,36 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
       ...finalBike,
       revisions,
     };
+
     setFinalBike(bike);
   }
 
+  function onBikeDelete() {
+    Alert.alert(
+      strings.alertDeleteBikeTitle(name),
+      strings.alertDeleteBikeText,
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () =>
+            deleteBike(_id)
+              .then(() => navigation.pop(2))
+              .catch(() => {}),
+        },
+      ]
+    );
+  }
+
   function newRevision() {
+    const newRev = { name: "new", time: 0, distance: 0 };
     setFinalBike({
       ...finalBike,
-      revisions: [
-        ...finalBike.revisions,
-        { name: "new", time: 0, distance: 0 },
-      ],
+      revisions: [...finalBike.revisions, newRev],
     });
   }
 
@@ -77,7 +139,7 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
           <View style={styles.distanceView}>
             <TextInput
               style={styles.totalDistanceText}
-              value={`${totalDistance || ""}`}
+              value={`${Math.round(totalDistance) || ""}`}
               onChangeText={(totalDistance) =>
                 setFinalBike({
                   ...finalBike,
@@ -124,8 +186,13 @@ const FinalPreview = ({ navigation, route: { params }, addBike }) => {
         <TouchableOpacity onPress={newRevision} style={styles.submitButton}>
           <Text>{strings.newRevisionButton}</Text>
         </TouchableOpacity>
+        {edit && (
+          <TouchableOpacity onPress={onBikeDelete} style={styles.submitButton}>
+            <Text>{strings.deleteBikeButton}</Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity onPress={onSubmit} style={styles.submitButton}>
-          <Text>{strings.addBikeButton}</Text>
+          <Text>{edit ? strings.editBikeButton : strings.addBikeButton}</Text>
         </TouchableOpacity>
       </View>
     </ScreenContainer>
@@ -206,6 +273,7 @@ const styles = StyleSheet.create({
     paddingTop: 2,
     fontSize: 16,
     paddingLeft: 6,
+    flex: 1,
   },
 });
 

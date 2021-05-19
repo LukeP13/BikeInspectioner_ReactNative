@@ -16,6 +16,7 @@ export default strings = {
   brandSelectTitle: "Select brand",
   modelSelectTitle: "Select model",
   finalPreviewTitle: "Preview",
+  editBikeTitle: "Edit",
 
   nextInspect: "Incoming revisions",
   noInspections: "No inspections",
@@ -36,6 +37,8 @@ export default strings = {
   previewName: "Name *",
   errorPreviewName: "Name required",
   addBikeButton: "Add bike",
+  deleteBikeButton: "Delete",
+  editBikeButton: "Save",
   newRevisionButton: "+",
 
   labelName: "Name:",
@@ -46,4 +49,10 @@ export default strings = {
   pendingRevision: "Pending...",
   labelTotal: "Total:",
   notifications: "Notifications",
+
+  alertEditTitle: "Do you want to save?",
+  alertEditText: "Some inspections have been modified",
+
+  alertDeleteBikeTitle: (name) => `Delete ${name || "bike"}?`,
+  alertDeleteBikeText: "This action is irreversible.",
 };

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { AppState, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
@@ -10,20 +10,31 @@ import BikeItem from "../../library/components/items/bikeItem";
 
 const ListBikesScreen = ({ navigation, getBikes, bikes }) => {
   const [loaded, setLoaded] = useState(false);
+  function fetchData() {
+    getBikes().then(({ error }) => {
+      !error && setLoaded(true);
+    });
+  }
+
   useFocusEffect(
     React.useCallback(() => {
       let isActive = true;
 
-      isActive &&
-        getBikes().then(({ error }) => {
-          !error && setLoaded(true);
-        });
+      isActive && fetchData();
 
       return () => {
         isActive = false;
       };
     }, [navigation])
   );
+
+  useEffect(() => {
+    AppState.addEventListener("change", fetchData);
+
+    return () => {
+      AppState.removeEventListener("change", fetchData);
+    };
+  }, []);
 
   return (
     <AppScreenContainer navigation={navigation}>

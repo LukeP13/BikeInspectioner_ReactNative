@@ -33,6 +33,7 @@ const Api = {
   getBikes: () => _api.get(`${bikes}`),
   postBike: (body) => _api.post(`${bikes}`, body),
   patchBike: (id, body) => _api.patch(`${bikes}/${id}`, body),
+  deleteBike: (id) => _api.del(`${bikes}/${id}`),
 
   //Revisions
   patchRevision: (bikeId, revId, body) =>

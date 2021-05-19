@@ -25,6 +25,14 @@ export function patchBike(bikeId, patchBody) {
     );
 }
 
+export function deleteBike(bikeId) {
+  return (dispatch) =>
+    Api.deleteBike(bikeId).then(
+      () => getBikes()(dispatch),
+      () => dispatch({ type: ERROR })
+    );
+}
+
 export function patchRevision(bikeId, revisionId, patchBody) {
   return (dispatch) =>
     Api.patchRevision(bikeId, revisionId, patchBody).then(

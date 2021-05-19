@@ -19,6 +19,7 @@ const ProfileScreen = ({
   navigation,
   logout,
   notificationsEnabled,
+  switchDisabled,
   ...props
 }) => {
   const [isEnabled, setEnabled] = useState(notificationsEnabled);
@@ -44,6 +45,7 @@ const ProfileScreen = ({
             ios_backgroundColor="#5DC571"
             onValueChange={toggleSwitch}
             value={isEnabled}
+            disabled={switchDisabled}
           />
         </View>
 
@@ -87,9 +89,10 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(state) {
+function mapStateToProps({ notifications: { enabled, token } }) {
   return {
-    notificationsEnabled: state.notifications.enabled,
+    notificationsEnabled: enabled,
+    switchDisabled: token ? false : true,
   };
 }
 
