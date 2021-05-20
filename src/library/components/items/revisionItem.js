@@ -3,21 +3,16 @@ import { StyleSheet, Text, View } from "react-native";
 import { formatTime } from "../../functions/convertMS";
 import globalStyles from "../../../styles/styles";
 import strings from "../../../../res/strings";
+import { colors } from "react-native-elements";
+import RevisionStatus from "./revisionStatus";
 
 const RevisionItem = ({ item }) => {
-  const { name, distance, time } = item;
+  const { name, distance, time, inProgress } = item;
+
   return (
     <View style={styles.container}>
       <Text style={styles.name}>{name}</Text>
-      <Text style={styles.period}>
-        {distance === 0 || time === 0
-          ? strings.pendingRevision
-          : distance
-          ? `${Math.round(distance)} Km${
-              time != null ? ` ${strings.or} ${formatTime(time)}` : ""
-            }`
-          : `${time ? formatTime(time) : "--"}`}
-      </Text>
+      <RevisionStatus {...item} />
     </View>
   );
 };
@@ -31,9 +26,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   name: {},
-  period: {
-    ...globalStyles.italic,
-  },
 });
 
 export default RevisionItem;

@@ -20,6 +20,7 @@ import { colors } from "react-native-elements";
 import OptionSelect from "../../library/components/optionSelect";
 import images from "../../../res/images";
 import mycolors from "../../../res/colors";
+import RevisionStatus from "../../library/components/items/revisionStatus";
 
 const BikeDetails = ({
   route: {
@@ -100,12 +101,9 @@ const BikeDetails = ({
   );
 };
 
-const Revision = ({
-  revision: { _id, name, time, distance, notify, inProgress },
-  onPass,
-  onToggleNotification,
-  onInProgress,
-}) => {
+const Revision = ({ revision, onPass, onToggleNotification, onInProgress }) => {
+  const { _id, name, time, distance, notify, inProgress } = revision;
+
   const [isEnabled, setEnabled] = useState(notify || false);
   const toggleSwitch = () => {
     onToggleNotification(!isEnabled);
@@ -143,15 +141,7 @@ const Revision = ({
       <View style={styles.revisionView}>
         <Text style={styles.revisionName}>{name}</Text>
         <View style={styles.revisionDistance}>
-          <Text>
-            {distance === 0 || time === 0
-              ? strings.pendingRevision
-              : distance
-              ? `${Math.round(distance)} Km${
-                  time != null ? ` ${strings.or} ${formatTime(time)}` : ""
-                }`
-              : `${time ? formatTime(time) : "--"}`}
-          </Text>
+          <RevisionStatus {...revision} />
         </View>
       </View>
 
@@ -235,6 +225,7 @@ const styles = StyleSheet.create({
   },
   revisionOther: {},
   revisionPassedButton: {},
+  revisionDistance: { marginRight: 3 },
   notifContainer: {
     flexDirection: "row",
     justifyContent: "space-between",

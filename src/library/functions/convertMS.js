@@ -40,7 +40,7 @@ export function convertMiliseconds(miliseconds, format) {
   }
 }
 
-export function formatTime(time) {
+export function formatTimeAll(time) {
   const { years, months, days } = convertMiliseconds(time);
 
   return `${
@@ -50,4 +50,16 @@ export function formatTime(time) {
   }${months && days ? " " : ""}${
     days ? `${days} ${days > 1 ? strings.days : strings.day}` : ""
   }`;
+}
+
+export function formatTime(time) {
+  const { years, months, days } = convertMiliseconds(time);
+
+  return years
+    ? `${years} ${years > 1 ? strings.years : strings.year}`
+    : months
+    ? `${months} ${months > 1 ? strings.months : strings.month}`
+    : days
+    ? `${days} ${days > 1 ? strings.days : strings.day}`
+    : "";
 }

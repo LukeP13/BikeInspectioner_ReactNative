@@ -14,7 +14,6 @@ export function saveToken(token) {
 }
 
 export function enableNotifications(token) {
-  console.log("");
   return (dispatch) =>
     Api.postToken(token).then(
       () => dispatch({ type: ENABLE_NOTIFICATIONS }),
@@ -23,7 +22,6 @@ export function enableNotifications(token) {
 }
 
 export function disableNotifications(token) {
-  console.log("disable");
   return (dispatch) =>
     Api.deleteToken(token).then(
       () => dispatch({ type: DISABLE_NOTIFICATIONS }),

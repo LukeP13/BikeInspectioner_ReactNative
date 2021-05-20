@@ -11,6 +11,8 @@ import {
 } from "../../library/functions/convertMS";
 import { range } from "../../library/functions/utilities";
 import images from "../../../res/images";
+import mycolors from "../../../res/colors";
+
 const TIME = {
   SECOND: 1000,
   MINUTE: 1000 * 60,
@@ -35,7 +37,6 @@ const RevisionEdit = ({ revision, onChange, onDelete = null }) => {
       parseInt(years) * TIME.YEAR +
       parseInt(months) * TIME.MONTH +
       parseInt(days) * TIME.DAY;
-    console.log(years, months, days);
     onChange({
       time: t,
     });
@@ -60,7 +61,7 @@ const RevisionEdit = ({ revision, onChange, onDelete = null }) => {
           selectedValue={distance}
           onValueChange={(distance) => onChange({ distance })}
         >
-          {range(0, 10000, 500).map((item, i) => (
+          {range(0, 100000, 500).map((item, i) => (
             <Picker.Item key={i} label={`${item}`} value={item} />
           ))}
         </Picker>
@@ -115,19 +116,25 @@ const RevisionEdit = ({ revision, onChange, onDelete = null }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginVertical: 5,
-    padding: 5,
+    marginTop: 5,
     flexDirection: "column",
-    elevation: 1,
+    borderWidth: 2.5,
+    borderColor: mycolors.secondaryColor,
+    borderRadius: 3,
   },
   nameView: {
     borderBottomWidth: 0.3,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: mycolors.secondaryColor,
+    paddingVertical: 3,
+    paddingHorizontal: 10,
   },
   nameText: {
     fontSize: 17,
     flex: 1,
+    color: colors.white,
   },
   distanceView: {
     flexDirection: "row",
@@ -137,17 +144,15 @@ const styles = StyleSheet.create({
   },
   distancePicker: {
     height: 20,
-    width: 105,
+    width: 125,
     padding: 0,
     borderBottomWidth: 1,
   },
   viewContainer: {
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 0.5,
-    borderRadius: 4,
+    borderBottomWidth: 0.5,
     padding: 10,
-    marginTop: 5,
   },
   timeView: {
     alignItems: "center",

@@ -39,7 +39,12 @@ const FinalPreview = ({
             let b = finalBike.incomingRevisions.find(
               (b) => b._id != null && b._id === a._id
             );
-            return b != null ? b : a;
+            return b != null
+              ? {
+                  ...b,
+                  name: a.name,
+                }
+              : a;
           }),
         };
         Alert.alert(strings.alertEditTitle, strings.alertEditText, [
@@ -124,7 +129,6 @@ const FinalPreview = ({
   return (
     <ScreenContainer style={styles.container}>
       <View style={styles.titleView}>
-        <Text style={styles.labelText}>{strings.labelName}</Text>
         <TextInput
           style={styles.titleText}
           placeholder={strings.previewName}
@@ -134,44 +138,45 @@ const FinalPreview = ({
         />
       </View>
       <ScrollView style={styles.scrollView}>
-        <View style={styles.distanceContainer}>
-          <Text style={styles.labelText}>{strings.labelTotalDistance}</Text>
-          <View style={styles.distanceView}>
-            <TextInput
-              style={styles.totalDistanceText}
-              value={`${Math.round(totalDistance) || ""}`}
-              onChangeText={(totalDistance) =>
-                setFinalBike({
-                  ...finalBike,
-                  totalDistance: parseInt(totalDistance) || 0,
-                })
-              }
-              keyboardType="numeric"
-            />
-            <Text>{`${strings.km}`.toUpperCase()}</Text>
+        <View style={styles.distanceGlobal}>
+          <View style={styles.distanceContainer}>
+            <Text style={styles.labelText}>{strings.labelTotalDistance}</Text>
+            <View style={styles.distanceView}>
+              <TextInput
+                style={styles.totalDistanceText}
+                value={`${Math.round(totalDistance) || ""}`}
+                onChangeText={(totalDistance) =>
+                  setFinalBike({
+                    ...finalBike,
+                    totalDistance: parseInt(totalDistance) || 0,
+                  })
+                }
+                keyboardType="numeric"
+              />
+              <Text>{`${strings.km}`.toUpperCase()}</Text>
+            </View>
+          </View>
+
+          <View style={styles.distanceContainer}>
+            <Text style={styles.labelText}>{strings.labelDistPerYear}</Text>
+            <View style={styles.distanceView}>
+              <Picker
+                style={styles.distancePicker}
+                selectedValue={distancePerYear}
+                onValueChange={(distancePerYear) =>
+                  setFinalBike({ ...finalBike, distancePerYear })
+                }
+              >
+                {range(0, 50000, 500).map((item, i) => (
+                  <Picker.Item key={i} label={`${item}`} value={item} />
+                ))}
+              </Picker>
+              <Text>{`${strings.km} / ${strings.year}`.toUpperCase()}</Text>
+            </View>
           </View>
         </View>
-
-        <View style={styles.distanceContainer}>
-          <Text style={styles.labelText}>{strings.labelDistPerYear}</Text>
-          <View style={styles.distanceView}>
-            <Picker
-              style={styles.distancePicker}
-              selectedValue={distancePerYear}
-              onValueChange={(distancePerYear) =>
-                setFinalBike({ ...finalBike, distancePerYear })
-              }
-            >
-              {range(0, 10000, 500).map((item, i) => (
-                <Picker.Item key={i} label={`${item}`} value={item} />
-              ))}
-            </Picker>
-            <Text>{`${strings.km} / ${strings.year}`.toUpperCase()}</Text>
-          </View>
-        </View>
-
         <View style={styles.revisionsView}>
-          <Text style={styles.labelText}>Revisions: </Text>
+          <Text style={styles.labelText}>{strings.inspections}</Text>
           {revisions.map((item, i) => (
             <RevisionEdit
               key={i}
@@ -202,11 +207,8 @@ const FinalPreview = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
-    marginHorizontal: 5,
     marginBottom: 5,
     borderRadius: 5,
-    elevation: 1,
     alignItems: "center",
     paddingBottom: 5,
   },
@@ -236,6 +238,8 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderBottomWidth: 1,
     marginBottom: 5,
+    borderTopStartRadius: 5,
+    borderTopEndRadius: 5,
   },
   titleText: {
     fontSize: 25,
@@ -249,24 +253,32 @@ const styles = StyleSheet.create({
   },
   revisionsView: {
     flex: 1,
-    marginTop: 20,
+    marginTop: 15,
+    marginHorizontal: 5,
   },
   scrollView: {
-    paddingHorizontal: 10,
-    width: "95%",
+    paddingHorizontal: 5,
+    width: "100%",
+  },
+  distanceGlobal: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
   },
   distanceContainer: {
-    marginTop: 20,
     borderBottomWidth: 0.5,
+    paddingRight: 15,
+    marginHorizontal: 5,
   },
   distanceView: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
+    flex: 1,
   },
   distancePicker: {
     height: 35,
-    width: 105,
+    width: 115,
     padding: 0,
   },
   totalDistanceText: {
@@ -274,6 +286,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingLeft: 6,
     flex: 1,
+    maxWidth: 120,
   },
 });
 

@@ -17,7 +17,6 @@ const BikeItem = ({ item, onPress }) => {
       <View style={styles.contentView}>
         {incomingRevisions.length > 0 ? (
           range(0, Math.min(incomingRevisions.length - 1, 3)).map((i) => {
-            console.log(incomingRevisions[i]);
             return (
               <RevisionItem
                 key={incomingRevisions[i]._id}

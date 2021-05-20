@@ -20,6 +20,8 @@ export default strings = {
 
   nextInspect: "Incoming revisions",
   noInspections: "No inspections",
+  inspections: "Inspections:",
+  revisions: "Revisions",
 
   years: "years",
   year: "year",
