@@ -4,6 +4,7 @@ import AddBikeNavigator from "./addBike-navigator";
 import ProfileScreen from "../screens/profile";
 import BikeDetailsNavigator from "./bikeDetails-navigator";
 import { colors } from "react-native-elements";
+import UserNavigator from "./user-navigator";
 
 const { Navigator, Screen } = createDrawerNavigator();
 
@@ -21,6 +22,6 @@ export default AppNavigator = () => (
         title: "Add Bike",
       }}
     />
-    <Screen name="Profile" component={ProfileScreen} />
+    <Screen name="Profile" component={UserNavigator} />
   </Navigator>
 );

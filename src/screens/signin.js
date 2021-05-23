@@ -35,7 +35,7 @@ const SignIn = ({ navigation, login, fcmToken }) => {
   }
 
   function resetPassword() {
-    console.log("forgotPassword");
+    navigation.push("ForgotPassword");
   }
 
   function register() {

@@ -26,7 +26,7 @@ const RevisionEdit = ({ revision, onChange, onDelete = null }) => {
   const units = strings.km;
   const { name, distance, time } = revision;
 
-  const timeConverted = convertMiliseconds(time);
+  const timeConverted = convertMiliseconds(time || 0);
 
   function setTime({
     years = timeConverted.years,

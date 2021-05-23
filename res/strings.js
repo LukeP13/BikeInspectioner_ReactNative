@@ -57,4 +57,13 @@ export default strings = {
 
   alertDeleteBikeTitle: (name) => `Delete ${name || "bike"}?`,
   alertDeleteBikeText: "This action is irreversible.",
+
+  editUserButton: "Save",
+  editPasswordButton: "Change pasword",
+  oldPassword: "Current password *",
+  newPassword: "New password *",
+
+  send: "Send",
+  code: "Code",
+  check: "Check",
 };

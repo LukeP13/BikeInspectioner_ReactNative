@@ -8,13 +8,21 @@ import {
   logout,
   tokens,
   revisions,
+  user,
+  password,
+  forgotPassword,
+  checkPasswordCode,
+  resetPassword,
 } from "./paths";
 
 const state = {
   development: "http://localhost:5000",
   production: "http://192.168.1.80:5000",
+  palafrugell: "http://192.168.1.133:5000",
+  hotspot: "http://192.168.43.110:5000",
 };
-const _api = CreateApi(state.production);
+const endpoint = state.palafrugell;
+const _api = CreateApi(endpoint);
 
 const Api = {
   //Auth
@@ -23,6 +31,22 @@ const Api = {
   register: (body) => _api.post(`${register}`, body),
   postToken: (token) => _api.post(`${tokens}`, { token }),
   deleteToken: (token) => _api.del(`${tokens}`, { token }),
+
+  forgotPassword: (email) => _api.post(`${forgotPassword}`, { email }),
+  checkPasswordCode: (email, code) =>
+    _api.post(`${checkPasswordCode}`, { email, code }),
+  resetPassword: (email, code, password) =>
+    _api.post(`${resetPassword}`, { email, code, password }),
+
+  //User
+  getUser: () => _api.get(`${user}`),
+  patchUser: (body) => _api.patch(`${user}`, body),
+  patchPassword: (oldPassword, newPassword) =>
+    _api.patch(`${user}/${password}`, { oldPassword, newPassword }),
+  deleteUser: (password) => _api.del(`${user}`, { password }),
+
+  //Get images
+  getImageUri: (path) => `${endpoint}/${path}`,
 
   //Brands && Models
   getBrands: () => _api.get(`${brands}`),
