@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  CheckBox,
+} from "react-native";
 import { ScreenContainer } from "react-native-screens";
 import { connect } from "react-redux";
 import mycolors from "../../../res/colors";
@@ -15,6 +21,7 @@ const Register = ({ navigation, ...props }) => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [termsOfService, setTermsOfService] = useState(false);
 
   const [form, setForm] = useState({
     username: false,
@@ -29,7 +36,7 @@ const Register = ({ navigation, ...props }) => {
   function sendEnabled() {
     for (let o in form) if (!form[o]) return false;
 
-    return true;
+    return termsOfService;
   }
 
   function onValidChange(prop, val) {
@@ -67,6 +74,7 @@ const Register = ({ navigation, ...props }) => {
         value={email}
         onChangeText={setEmail}
         type="email"
+        errorMessage="Invalid email"
         onValidChange={(val) => onValidChange("email", val)}
         required
       />
@@ -98,6 +106,17 @@ const Register = ({ navigation, ...props }) => {
         onValidChange={(val) => onValidChange("phone", val)}
         type="phone"
       />
+
+      <View style={styles.checkboxContainer}>
+        <CheckBox
+          value={termsOfService}
+          onValueChange={setTermsOfService}
+          style={styles.checkbox}
+        />
+        <Text style={styles.label}>
+          I have read and accept to the terms and conditions
+        </Text>
+      </View>
 
       <TimeoutText value={message} timeout={1500} />
 
@@ -139,11 +158,22 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
+    marginTop: 10,
     backgroundColor: mycolors.secondaryColor,
   },
   disabledButton: {
     backgroundColor: mycolors.disabledColor,
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    marginBottom: 20,
+  },
+  checkbox: {
+    alignSelf: "center",
+  },
+  label: {
+    margin: 8,
+    fontSize: 12,
   },
 });
 

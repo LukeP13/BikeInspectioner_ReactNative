@@ -27,6 +27,10 @@ const CheckCode = ({
     );
   }
 
+  function editEnabled() {
+    return code.length == 6;
+  }
+
   return (
     <ScreenContainer style={styles.screenContainer}>
       <View style={styles.inputView}>
@@ -37,7 +41,10 @@ const CheckCode = ({
           placeholder={strings.code}
         />
       </View>
-      <TouchableOpacity style={styles.loginBtn} onPress={onPress}>
+      <TouchableOpacity
+        style={[styles.loginBtn, !editEnabled() && styles.disabledBtn]}
+        onPress={editEnabled() && onPress}
+      >
         <Text style={styles.loginText}>{strings.check}</Text>
       </TouchableOpacity>
     </ScreenContainer>
@@ -74,6 +81,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 40,
     backgroundColor: mycolors.secondaryColor,
+  },
+  disabledBtn: {
+    backgroundColor: mycolors.disabledColor,
   },
 });
 

@@ -4,7 +4,6 @@ const initialState = {
   isLoggedIn: false,
   userId: "",
   token: "",
-  expiresOn: "",
 };
 
 const authReducer = (state = initialState, action) => {

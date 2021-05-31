@@ -25,12 +25,12 @@ const AddBikeScreen = ({ navigation }) => {
     <AppScreenContainer navigation={navigation} title="Add Bike">
       <View style={styles.container}>
         <TouchableOpacity
-          style={styles.selectButton}
+          style={styles.loginBtn}
           onPress={() => navigation.navigate("brandSelect")}
         >
           <Text style={styles.selectButtonText}>Select Model</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.selectButton} onPress={onCustomBike}>
+        <TouchableOpacity style={styles.loginBtn} onPress={onCustomBike}>
           <Text style={styles.selectButtonText}>Custom bike</Text>
         </TouchableOpacity>
       </View>
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     width: "100%",
+    paddingTop: 5,
   },
   selectButton: {
     marginHorizontal: 10,
@@ -60,6 +61,15 @@ const styles = StyleSheet.create({
   },
   selectButtonText: {
     fontSize: 25,
+  },
+  loginBtn: {
+    width: "90%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    backgroundColor: mycolors.secondaryColor,
   },
 });
 

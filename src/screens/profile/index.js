@@ -117,7 +117,7 @@ const ProfileScreen = ({
           </View>
 
           <TouchableOpacity style={styles.logoutButton} onPress={onEdit}>
-            <Text style={styles.logoutText}>Edit User</Text>
+            <Text style={styles.logoutText}>Edit user</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.logoutButton} onPress={onLogout}>

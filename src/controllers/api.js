@@ -21,7 +21,7 @@ const state = {
   palafrugell: "http://192.168.1.133:5000",
   hotspot: "http://192.168.43.110:5000",
 };
-const endpoint = state.palafrugell;
+const endpoint = state.production;
 const _api = CreateApi(endpoint);
 
 const Api = {

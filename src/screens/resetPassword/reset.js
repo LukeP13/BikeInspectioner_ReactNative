@@ -22,7 +22,8 @@ const ResetPassword = ({
   const [repeatPassword, setRepeatPassword] = useState("");
 
   function editEnabled() {
-    return password === repeatPassword;
+    let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return regex.test(password) && password === repeatPassword;
   }
 
   function onPress() {
