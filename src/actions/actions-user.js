@@ -13,11 +13,13 @@ export function patchUser(body) {
   return (dispatch) =>
     Api.patchUser(body).then(
       () => getUser()(dispatch),
-      (err) =>
-        dispatch({
+      (err) => {
+        console.log(err);
+        return dispatch({
           type: ERROR,
-          error: err.response.data && err.response.data.message,
-        })
+          error: err?.response?.data && err.response.data.message,
+        });
+      }
     );
 }
 

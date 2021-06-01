@@ -5,7 +5,7 @@
     "slug": "BikeInspec",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./res/images/iconBI.png",
+    "icon": "./res/images/icon.png",
     "splash": {
       "image": "./res/images/splash.png",
       "resizeMode": "contain",
@@ -22,19 +22,20 @@
       "userInterfaceStyle": "light",
       "infoPlist": {
         "UIUserInterfaceStyle": "Light"
-      }
+      },
+      "bundleIdentifier": "tfg.bikeinspectioner"
     },
     "android": {
       "googleServicesFile": "./android/google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./res/images/iconBI.png",
+        "foregroundImage": "./res/images/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "userInterfaceStyle": "light",
       "package": "tfg.bikeinspectioner"
     },
     "web": {
-      "favicon": "./res/images/favicon.png"
+      "favicon": "./res/images/icon.png"
     }
   }
 }

@@ -14,6 +14,7 @@ import { colors } from "react-native-elements";
 import { ScreenContainer } from "react-native-screens";
 import { connect } from "react-redux";
 import strings from "../../../res/strings";
+import * as ImagePicker from "expo-image-picker";
 
 import * as ActionCreators from "../../actions";
 import Api from "../../controllers/api";
@@ -28,9 +29,11 @@ const ProfileScreen = ({
   switchDisabled,
   getUser,
   user,
+  patchUser,
   ...props
 }) => {
   const [loaded, setLoaded] = useState(false);
+  const [image, setImage] = useState(null);
 
   function fetchData() {
     getUser().then(({ error }) => {
@@ -77,11 +80,56 @@ const ProfileScreen = ({
   }
 
   const { username, email, phone, avatar } = user;
+  //Image Picker
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
+        }
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    setImage(Api.getImageUri(avatar));
+  }, [avatar]);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [3, 3],
+      quality: 1,
+    });
+
+    console.log("-----------------------", result);
+    if (!result.cancelled) {
+      let data = new FormData();
+      data.append("avatar", {
+        name: result.uri,
+        type: "multipart/form-data",
+        uri:
+          Platform.OS === "android"
+            ? result.uri
+            : result.uri.replace("file://", ""),
+      });
+      patchUser(data).then((res) => console.log(res));
+    }
+  };
+
   return (
     <AppScreenContainer navigation={navigation} title="Profile">
       {loaded && (
         <View style={styles.container}>
-          <Image style={styles.avatar} source={images.noImage} />
+          <TouchableOpacity style={styles.avatarContainer} onPress={pickImage}>
+            <Image
+              style={styles.avatar}
+              source={image ? { uri: image } : images.noImage}
+            />
+          </TouchableOpacity>
 
           <View style={styles.infoView}>
             <Text style={styles.infoText}>{username}</Text>
@@ -91,10 +139,12 @@ const ProfileScreen = ({
             <Text style={styles.infoText}>{email}</Text>
           </View>
 
-          {phone && (
+          {phone ? (
             <View style={styles.infoView}>
               <Text style={styles.infoText}>{phone}</Text>
             </View>
+          ) : (
+            <></>
           )}
 
           <View style={styles.separator} />
@@ -159,6 +209,10 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderWidth: 2,
     borderColor: mycolors.secondaryColor,
+  },
+  avatarContainer: {
+    height: 150,
+    width: 150,
     marginTop: 30,
     marginBottom: 10,
   },
