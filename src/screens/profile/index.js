@@ -19,6 +19,7 @@ import * as ActionCreators from "../../actions";
 import Api from "../../controllers/api";
 import AppScreenContainer from "../../library/components/appScreenContainer";
 import mycolors from "../../../res/colors";
+import images from "../../../res/images";
 
 const ProfileScreen = ({
   navigation,
@@ -75,7 +76,6 @@ const ProfileScreen = ({
     navigation.navigate("Edit", { user });
   }
 
-  //
   const { username, email, phone, avatar } = user;
   return (
     <AppScreenContainer navigation={navigation} title="Profile">
@@ -83,7 +83,7 @@ const ProfileScreen = ({
         <View style={styles.container}>
           <Image
             style={styles.avatar}
-            source={{ uri: Api.getImageUri(avatar) }}
+            source={avatar ? { uri: Api.getImageUri(avatar) } : images.noImage}
           />
 
           <View style={styles.infoView}>

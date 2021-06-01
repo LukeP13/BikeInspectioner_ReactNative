@@ -17,7 +17,8 @@ import {
 
 const state = {
   development: "http://localhost:5000",
-  production: "http://192.168.1.80:5000",
+  production: "https://fluent-optics-314815.oa.r.appspot.com",
+  mntrs: "http://192.168.1.80:5000",
   palafrugell: "http://192.168.1.133:5000",
   hotspot: "http://192.168.43.110:5000",
 };
