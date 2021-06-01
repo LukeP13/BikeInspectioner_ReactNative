@@ -81,10 +81,7 @@ const ProfileScreen = ({
     <AppScreenContainer navigation={navigation} title="Profile">
       {loaded && (
         <View style={styles.container}>
-          <Image
-            style={styles.avatar}
-            source={avatar ? { uri: Api.getImageUri(avatar) } : images.noImage}
-          />
+          <Image style={styles.avatar} source={images.noImage} />
 
           <View style={styles.infoView}>
             <Text style={styles.infoText}>{username}</Text>
