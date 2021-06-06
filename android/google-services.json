@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "821424015222",
+    "project_id": "bikeinspectioner",
+    "storage_bucket": "bikeinspectioner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:821424015222:android:9d721e0fd05c34cd335c57",
+        "android_client_info": {
+          "package_name": "tfg.bikeinspectioner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "821424015222-09dlg9npcpmaro5of570dur7vk6rpegq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALiHK_XdGQPxp1EHDW22r8PqlkP0En-ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "821424015222-09dlg9npcpmaro5of570dur7vk6rpegq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
