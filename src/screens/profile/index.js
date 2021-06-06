@@ -110,7 +110,7 @@ const ProfileScreen = ({
       let data = new FormData();
       data.append("avatar", {
         name: result.uri,
-        type: "multipart/form-data",
+        type: result.type,
         uri:
           Platform.OS === "android"
             ? result.uri

@@ -22,9 +22,9 @@ const state = {
   palafrugell: "http://192.168.1.133:5000",
   hotspot: "http://192.168.43.110:5000",
 };
-const endpoint = state.mntrs;
+const endpoint = state.production;
 const _api = CreateApi(endpoint);
-
+console.log(endpoint);
 const Api = {
   //Auth
   login: (body) => _api.post(`${login}`, body),
@@ -41,10 +41,7 @@ const Api = {
 
   //User
   getUser: () => _api.get(`${user}`),
-  patchUser: (body) => {
-    console.log(body);
-    return _api.patch(`${user}`, body);
-  },
+  patchUser: (body) => _api.patch(`${user}`, body),
   patchPassword: (oldPassword, newPassword) =>
     _api.patch(`${user}/${password}`, { oldPassword, newPassword }),
   deleteUser: (password) => _api.del(`${user}`, { password }),
